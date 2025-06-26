@@ -1,5 +1,5 @@
  .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url('images/et43534.jpg');
+  background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url('../images/et43534.jpg');
   background-position: 50% 50%;
 }
 
@@ -10,12 +10,16 @@
 .u-section-1 .u-form-1 {
   height: 767px;
   width: 570px;
-  margin: 0 auto 60px;
+  margin: 0 auto;
 }
 
 .u-section-1 .u-input-1 {
   --border-color-var: #fbd0b9;
   --text-color-var: #f58d54;
+}
+
+.u-section-1 .u-form-group-2 {
+  margin-left: 0;
 }
 
 .u-section-1 .u-input-2 {
@@ -59,22 +63,12 @@
   --text-color-var: #f58d54;
 }
 
-.u-section-1 .u-form-group-7 {
-  margin-left: 0;
-}
-
-.u-section-1 .u-input-7 {
-  --border-color-var: #fbd0b9;
-  --text-color-var: #f58d54;
-}
-
-.u-section-1 .u-form-group-8 {
-  margin-left: 0;
-}
-
-.u-section-1 .u-input-8 {
-  --border-color-var: #fbd0b9;
-  --text-color-var: #f58d54;
+.u-section-1 .u-btn-2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 85px auto 60px;
+  padding: 10px 56px 10px 54px;
 }
 
 @media (max-width: 1199px) {

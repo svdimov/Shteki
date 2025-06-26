@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/Profile-details.css' %}" media="screen">
+
+<section
+    class="u-clearfix u-image u-shading u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-section-1"
+    id="carousel_3d89">
+    <div class="u-clearfix u-sheet u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-sheet-1">
+
+        <h3 class="u-align-right u-custom-font u-font-georgia u-text u-text-color-var u-text-default u-text-1">
+            stefoto_85 <!---{{ user.username }}--->
+        </h3>
+
+        <img src="{% static 'images/stefan_profile.jpg' %}"
+             alt="Profile Picture"
+             class="u-align-right u-border-20 u-border-palette-1-base u-image u-image-circle u-image-1"
+             width="337" height="337"
+             data-image-width="1350" data-image-height="1800"
+             data-animation-name="customAnimationIn"
+             data-animation-duration="1500" data-animation-delay="750">
+
+        <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">edit profile </a>
+        <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">delete profile </a>
+        <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-3">change password </a>
+
+    </div>
+</section>
+
+{% endblock %}
