@@ -8,9 +8,9 @@
 }
 
 .u-section-1 .u-form-1 {
-  height: 767px;
-  width: 570px;
-  margin: 0 auto;
+  height: 591px;
+  width: 306px;
+  margin: 17px auto 0;
 }
 
 .u-section-1 .u-input-1 {
@@ -63,17 +63,26 @@
   --text-color-var: #f58d54;
 }
 
+.u-section-1 .u-btn-1 {
+  width: 100%;
+  padding: 10px 0;
+}
+
 .u-section-1 .u-btn-2 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin: 85px auto 60px;
+  margin: 60px auto;
   padding: 10px 56px 10px 54px;
 }
 
 @media (max-width: 1199px) {
   .u-section-1 .u-sheet-1 {
     min-height: 707px;
+  }
+
+  .u-section-1 .u-form-1 {
+    width: 570px;
   }
 }
 
@@ -99,6 +108,6 @@
   }
 
   .u-section-1 .u-form-1 {
-    width: 340px;
+    width: 306px;
   }
 }

@@ -1,15 +1,16 @@
  .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url('images/et43534.jpg');
+  background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url('../images/et43534.jpg');
   background-position: 50% 50%;
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 858px;
+  min-height: 899px;
 }
 
 .u-section-1 .u-form-1 {
-  height: 679px;
-  margin: 0 250px 60px 320px;
+  height: 767px;
+  width: 303px;
+  margin: 0 auto;
 }
 
 .u-section-1 .u-input-1 {
@@ -76,41 +77,50 @@
   --text-color-var: #f58d54;
 }
 
+.u-section-1 .u-btn-1 {
+  width: 100%;
+  padding: 10px 0;
+}
+
+.u-section-1 .u-btn-2 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 30px auto 60px;
+}
+
 @media (max-width: 1199px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 707px;
+    min-height: 741px;
   }
 
   .u-section-1 .u-form-1 {
-    margin-right: 150px;
-    margin-left: 220px;
+    width: 570px;
   }
 }
 
 @media (max-width: 991px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 542px;
-  }
-
-  .u-section-1 .u-form-1 {
-    margin-right: 40px;
-    margin-left: 110px;
+    min-height: 568px;
   }
 }
 
 @media (max-width: 767px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 407px;
+    min-height: 426px;
   }
 
   .u-section-1 .u-form-1 {
-    margin-right: 0;
-    margin-left: 0;
+    width: 540px;
   }
 }
 
 @media (max-width: 575px) {
   .u-section-1 .u-sheet-1 {
-    min-height: 256px;
+    min-height: 268px;
+  }
+
+  .u-section-1 .u-form-1 {
+    width: 340px;
   }
 }
