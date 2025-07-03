@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 # Create your views here.
 
 class HomePageView(TemplateView):
-    template_name = 'events/events-details.html'
+    template_name = 'about.html'
 
 # class ContactPageView(TemplateView):
 #     template_name = 'contacts.html'
