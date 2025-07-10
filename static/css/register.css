@@ -1,96 +1,105 @@
- .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url('../images/et43534.jpg');
-  background-position: 50% 50%;
+.u-section-1 {
+    background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url('../images/et43534.jpg');
+    background-position: 50% 50%;
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 906px;
+    min-height: 906px;
 }
 
 .u-section-1 .u-form-1 {
-  height: 328px;
-  margin: 231px 407px 60px 430px;
+    height: 328px;
+    margin: 231px 407px 60px 430px;
 }
 
 .u-section-1 .u-form-group-1 {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .u-section-1 .u-input-1 {
-  --border-color-var: #fbd0b9;
-  --text-color-var: #f58d54;
+    --border-color-var: #fbd0b9;
+    --text-color-var: #f58d54;
 }
 
 .u-section-1 .u-input-2 {
-  --border-color-var: #fbd0b9;
-  --text-color-var: #f58d54;
+    --border-color-var: #fbd0b9;
+    --text-color-var: #f58d54;
 }
 
 .u-section-1 .u-form-group-3 {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 .u-section-1 .u-input-3 {
-  --border-color-var: #fbd0b9;
-  --text-color-var: #f58d54;
+    --border-color-var: #fbd0b9;
+    --text-color-var: #f58d54;
 }
 
 .u-section-1 .u-btn-1 {
-  --color-var: #f58d54;
-  --hover-color-var: #b47a59;
-  font-weight: 700;
-  background-image: linear-gradient(#f58d54, #f55c24);
-  border-style: solid;
+    --color-var: #f58d54;
+    --hover-color-var: #b47a59;
+    font-weight: 700;
+    background-image: linear-gradient(#f58d54, #f55c24);
+    border-style: solid;
 }
 
 @media (max-width: 1199px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 747px;
-  }
+    .u-section-1 .u-sheet-1 {
+        min-height: 747px;
+    }
 
-  .u-section-1 .u-form-1 {
-    margin-right: 307px;
-    margin-left: 330px;
-    width: 570px;
-  }
+    .u-section-1 .u-form-1 {
+        margin-right: 307px;
+        margin-left: 330px;
+        width: 570px;
+    }
 
-  .u-section-1 .u-btn-1 {
-    width: 100%;
-    padding: 10px 46px 10px 45px;
-  }
+    .u-section-1 .u-btn-1 {
+        width: 100%;
+        padding: 10px 46px 10px 45px;
+    }
 }
 
 @media (max-width: 991px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 572px;
-  }
+    .u-section-1 .u-sheet-1 {
+        min-height: 572px;
+    }
 
-  .u-section-1 .u-form-1 {
-    margin-right: 197px;
-    margin-left: 220px;
-  }
+    .u-section-1 .u-form-1 {
+        margin-right: 197px;
+        margin-left: 220px;
+    }
 }
 
 @media (max-width: 767px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 429px;
-  }
+    .u-section-1 .u-sheet-1 {
+        min-height: 429px;
+    }
 
-  .u-section-1 .u-form-1 {
-    margin-right: 107px;
-    margin-left: 130px;
-    width: 540px;
-  }
+    .u-section-1 .u-form-1 {
+        margin-right: 107px;
+        margin-left: 130px;
+        width: 540px;
+    }
 }
 
 @media (max-width: 575px) {
-  .u-section-1 .u-sheet-1 {
-    min-height: 270px;
-  }
+    .u-section-1 .u-sheet-1 {
+        min-height: 270px;
+    }
 
-  .u-section-1 .u-form-1 {
-    margin-right: 7px;
-    margin-left: 30px;
-    width: 340px;
-  }
+    .u-section-1 .u-form-1 {
+        margin-right: 7px;
+        margin-left: 30px;
+        width: 340px;
+    }
 }
+
+.u-form-1 label {
+    display: block !important;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #fbd0b9; /* например в тон с твоя дизайн */
+    font-weight: 700;
+}
+

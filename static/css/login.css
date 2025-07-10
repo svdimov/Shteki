@@ -126,3 +126,8 @@
     border-radius: 10px;
     text-align: center;
 }
+/* Hover effect for links inside u-text-1 and u-text-2 */
+.u-text-1 a:hover,
+.u-text-2 a:hover {
+    color: #E87A40 !important;
+}

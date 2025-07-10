@@ -15,14 +15,7 @@
 
                 {% csrf_token %}
 
-                <!-- 2. FORM ERRORS: This will display a message if login fails. -->
-                {% if form.non_field_errors %}
-                    <div class="u-form-send-error u-form-send-message" style="display: block !important;">
-                        {% for error in form.non_field_errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
+
 
                 <!-- 3. FORM FIELDS: 'as_p' works best with your login.css styles. -->
                 {{ form.as_p }}

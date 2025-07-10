@@ -33,7 +33,17 @@
 </head>
 <body data-home-page="Home.html" data-home-page-title="Home" data-path-to-root="./" data-include-products="false"
       class="u-body u-xl-mode" data-lang="en">
-<header class="u-clearfix u-header u-palette-3-light-1 u-header" id="sec-2a97">
+<header class="u-clearfix u-header u-palette-3-light-1 u-header" id="sec-2a97"><a href="{% url 'home' %}"
+                                                                                  class="u-image u-logo u-image-1"
+                                                                                  data-image-width="533"
+                                                                                  data-image-height="468"
+                                                                                  data-animation-name="customAnimationIn"
+                                                                                  data-animation-duration="1000"
+                                                                                  data-animation-delay="0">
+    <img src="{% static 'images/logo.png' %}" class="u-logo-image u-logo-image-1">
+</a>
+    <h1 class="u-align-center u-custom-font u-text u-text-color-var u-text-1" data-animation-name="customAnimationIn"
+        data-animation-duration="1500" data-animation-delay="500">Изкривени щеки&nbsp;&nbsp;</h1>
     <nav class="u-align-left u-font-size-14 u-menu u-menu-one-level u-nav-spacing-25 u-offcanvas u-menu-1"
          data-responsive-from="MD" role="navigation">
         <div class="menu-collapse"
@@ -69,78 +79,53 @@
             <ul class="u-nav u-spacing-30 u-unstyled u-nav-1" role="menubar">
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'home' %}" style="padding: 10px 0px;">Home</a>
+                                                      href="./" style="padding: 10px 0px;">Home</a>
                 </li>
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="Contacts.html" style="padding: 10px 0px;">Contacts</a>
+                                                      href="#" style="padding: 10px 0px;">Contacts</a>
+                </li>
+
+                <li role="none" class="u-nav-item"><a role="menuitem"
+                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+                                                      href="#" style="padding: 10px 0px;">Events</a>
                 </li>
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="Profile-details.html" style="padding: 10px 0px;">Account</a>
+                                                      href="#" style="padding: 10px 0px;">Members</a>
                 </li>
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="Events.html" style="padding: 10px 0px;">Events</a>
+                                                      href="#" style="padding: 10px 0px;">Photos</a>
                 </li>
-                <li role="none" class="u-nav-item"><a role="menuitem"
-                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="Contacts.html" style="padding: 10px 0px;">Members</a>
-                </li>
-                <li role="none" class="u-nav-item">
-                    {% if user.is_authenticated %}
+
+                {% if not  user.is_authenticated %}
+                    <li role="none" class="u-nav-item"><a role="menuitem"
+                                                          class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+                                                          href="{% url 'login' %}" target="_blank"
+                                                          style="padding: 10px 0px;">Login</a>
+                    </li>
+                {% else %}
+                    <li role="none" class="u-nav-item"><a role="menuitem"
+                                                          class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+                                                          href="{% url 'profile-details' request.user.pk %}"
+                                                          style="padding: 10px 0px;">Account</a>
+                    </li>
+                    <li role="none" class="u-nav-item">
                         <form method="post" action="{% url 'logout' %}" style="display:inline;">
                             {% csrf_token %}
                             <button type="submit"
-                                    role="menuitem"
-                                    class="logout-button u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                    style="background:none; border:none; padding:10px; cursor:pointer; font:inherit; text-transform:inherit; letter-spacing:inherit;">
+                                    class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+                                    style="background:none; border:none; padding:10px 0px; cursor:pointer; font:inherit; color:inherit; text-transform:inherit; letter-spacing:inherit;">
                                 Logout
                             </button>
                         </form>
-                    {% else %}
-                        <a role="menuitem"
-                           class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                           href="{% url 'login' %}" target="_blank"
-                           style="padding: 10px ;">Login</a>
-                    {% endif %}
-                </li>
+                    </li>
+
+                {% endif %}
             </ul>
         </div>
-        <div class="u-custom-menu u-nav-container-collapse" id="8384" role="region" aria-label="Menu panel">
-            <div class="u-align-center u-black u-container-align-center u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-                <div class="u-inner-container-layout u-sidenav-overflow">
-                    <div class="u-menu-close" tabindex="-1" aria-label="Close menu"></div>
-                    <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2" role="menubar">
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link"
-                                                              href="./">Home</a>
-                        </li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link"
-                                                              href="Contacts.html">Contacts</a>
-                        </li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link"
-                                                              href="Profile-details.html">profile</a>
-                        </li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link"
-                                                              href="Events.html">Events</a>
-                        </li>
-                        <li role="none" class="u-nav-item"><a role="menuitem" class="u-button-style u-nav-link"
-                                                              href="Contacts.html">Members</a>
-                        </li>
-                        <li role="none" class="u-nav-item">
-                            {% if user.is_authenticated %}
-                                <a role="menuitem" class="u-button-style u-nav-link"
-                                   href="{% url 'logout' %}">Logout</a>
-                            {% else %}
-                                <a role="menuitem" class="u-button-style u-nav-link"
-                                   href="{% url 'login' %}" target="_blank">Login</a>
-                            {% endif %}
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-        </div>
+
         <style class="menu-style">@media (max-width: 939px) {
             [data-responsive-from="MD"] .u-nav-container {
                 display: none;
@@ -151,26 +136,27 @@
             }
         }</style>
     </nav>
-    <a href="{% url 'home' %}" class="u-image u-logo u-image-1" data-image-width="533" data-image-height="468"
-       data-animation-name="customAnimationIn" data-animation-duration="1000" data-animation-delay="0">
-        <img src="{% static 'images/logo.png' %}" class="u-logo-image u-logo-image-1" alt="logo">
-    </a>
-    <h1 class="u-align-center u-custom-font u-text u-text-color-var u-text-1" data-animation-name="customAnimationIn"
-        data-animation-duration="1500" data-animation-delay="500">Изкривени щеки&nbsp;&nbsp;</h1></header>
+    {% if user.is_authenticated %}
+        <p class="u-align-center u-text u-text-color-var u-text-2">Wellcome : {{ user.email }}</p>
+    {% else %}
+        <p class="u-align-center u-text u-text-color-var u-text-2">Wellcome : Anonymous</p>
+    {% endif %}
+</header>
 {% block content %}
 {% endblock %}
+
 
 
 <footer class="u-align-center-md u-align-center-sm u-align-center-xs u-clearfix u-footer u-palette-3-light-1"
         id="sec-ad58">
     <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-sm u-sheet-1">
-        <a href="#" class="u-image u-logo u-image-1" data-image-width="533" data-image-height="468">
+        <a href="{% url 'home' %}" class="u-image u-logo u-image-1" data-image-width="533" data-image-height="468">
             <img src="{% static 'images/logo.png' %}" class="u-logo-image u-logo-image-1">
         </a>
         <h4 class="u-align-center-lg u-align-center-md u-align-center-xl u-custom-font u-text u-text-color-var u-text-1">
             Изкривени Щеки&nbsp; - Dimov Team 2025. All rights reserved. </h4>
         <div class="u-align-left u-social-icons u-social-icons-1">
-            <a class="u-social-url" title="facebook" target="_blank" href=""><span
+            <a class="u-social-url" title="facebook" target="_blank" href="https://www.facebook.com/groups/987216818883275"><span
                     class="u-icon u-social-facebook u-social-icon u-icon-1"><svg class="u-svg-link"
                                                                                  preserveAspectRatio="xMidYMin slice"
                                                                                  viewBox="0 0 112 112" style=""><use
