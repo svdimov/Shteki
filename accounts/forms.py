@@ -1,5 +1,5 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, SetPasswordForm
 from django import forms
 
 from accounts.models import Profile
@@ -43,6 +43,14 @@ class AppUserChangeForm(UserChangeForm):
         model = UserModel
 
 
+# accounts/forms.py
+
+
+class CustomSetPasswordForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['new_password1'].help_text = ''
+        self.fields['new_password2'].help_text = ''
 
 
 
