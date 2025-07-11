@@ -66,7 +66,17 @@ class CustomAuthenticationForm(AuthenticationForm):
     }
 
 class ProfileEditForm(ProfileBaseForm):
-    pass
+    class Meta:
+        model = Profile
+        exclude = ['user']
+
+        widgets = {
+            # 'profile_picture': forms.URLInput(attrs={'placeholder': 'Enter a URL'}),
+            'profile_picture': forms.FileInput(attrs={'accept': 'image/*'}),
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+
 
 class ProfileCreateForm(ProfileBaseForm):
 

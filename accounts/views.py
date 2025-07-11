@@ -54,20 +54,19 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
 
 
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = UserModel
+    model = Profile
     form_class = ProfileEditForm
     template_name = 'profiles/edit-profile.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user=self.request.user)
 
     def test_func(self):
         return self.request.user.pk == self.kwargs['pk']
 
     def get_success_url(self) -> str:
-        return reverse(
-            'profile-details',
-            kwargs={
-                'pk': self.object.pk,
-            }
-        )
+        return reverse('profile-details', kwargs={'pk': self.object.pk})
+
 
 
 class ProfileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -79,4 +78,3 @@ class ProfileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         # This ensures a user can only delete their own account.
         # self.get_object() safely retrieves the user instance from the URL's pk.
         return self.request.user == self.get_object()
-#

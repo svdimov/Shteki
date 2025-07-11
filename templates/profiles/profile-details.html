@@ -13,7 +13,7 @@
             {{ profile.full_name }}
         </h3>
 
-        <img src="{% static 'images/stefan_profile.jpg' %}"
+        <img src="{{ profile.profile_picture_or_default }} "
              alt="Profile Picture"
              class="u-align-right u-border-20 u-border-palette-1-base u-image u-image-circle u-image-1"
              width="337" height="337"
@@ -21,7 +21,7 @@
              data-animation-name="customAnimationIn"
              data-animation-duration="1500" data-animation-delay="750">
 
-        <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">edit profile </a>
+        <a href="{% url 'edit-profile' request.user.pk %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">edit profile </a>
         <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">delete profile </a>
         <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-3">change password </a>
 

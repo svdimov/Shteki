@@ -1,4 +1,7 @@
+import os
+
 from django.contrib.auth.models import AbstractUser
+from django.templatetags.static import static
 from django.db import models
 
 # Create your models here.
@@ -10,6 +13,7 @@ from django.db import models
 
 from accounts.choices import GenderChoice
 from accounts.managers import AppUserManager
+from accounts.validators import FileSizeValidator
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
@@ -54,9 +58,11 @@ class Profile(models.Model):
         null=True,
     )
 
-    profile_picture = models.URLField(
+    profile_picture = models.ImageField(
+        upload_to='profile_pics/',
         blank=True,
         null=True,
+        validators=(FileSizeValidator(max_size_mb=5),)
     )
 
     gender = models.CharField(max_length=15, choices=GenderChoice)
@@ -66,3 +72,22 @@ class Profile(models.Model):
     @property
     def full_name(self):
         return f"{self.first_name or ''}  {self.last_name or ''}"
+
+    @property
+    def profile_picture_or_default(self):
+        if self.profile_picture and self.profile_picture.storage.exists(self.profile_picture.name):
+            return self.profile_picture.url
+        return static('/images/2133123.jpg')
+
+    def save(self, *args, **kwargs):
+        try:
+            this = Profile.objects.get(pk=self.pk)
+            if this.profile_picture and this.profile_picture != self.profile_picture:
+
+                old_path = this.profile_picture.path
+                if os.path.isfile(old_path):
+                    os.remove(old_path)
+        except Profile.DoesNotExist:
+            pass
+        super().save(*args, **kwargs)
+
