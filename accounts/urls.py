@@ -27,7 +27,7 @@ urlpatterns = [
     path("login/", CustomLoginView.as_view(), name='login'),
     path("logout/", LogoutView.as_view(), name='logout'),
 
-    # Password reset views
+    # Forgot password
     path("password-reset/", auth_views.PasswordResetView.as_view(
         template_name='profiles/password_reset.html'
     ), name='password_reset'),
@@ -44,6 +44,11 @@ urlpatterns = [
     path("reset/done/", auth_views.PasswordResetCompleteView.as_view(
         template_name='profiles/password_reset_complete.html'
     ), name='password_reset_complete'),
+
+    # Change password
+    path('password-change/', views.ChangePasswordView.as_view(), name='password-change'),
+    path('password-change/done/', views.ChangePasswordDoneView.as_view(), name='password-change-done'),
+
 
     path("profile/<int:pk>/", include([
         path('', views.ProfileDetailView.as_view(), name='profile-details'),

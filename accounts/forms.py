@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, SetPasswordForm, \
+    PasswordChangeForm
 from django import forms
 
 from accounts.models import Profile
@@ -84,3 +85,15 @@ class ProfileCreateForm(ProfileBaseForm):
 
 class ProfileDeleteForm(ProfileBaseForm):
     ...
+
+class CustomChangePasswordForm(PasswordChangeForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['new_password2'].label = 'Repeat  New Password'
+
+
+        self.fields['new_password1'].help_text = ''
+        self.fields['new_password2'].help_text = ''
+

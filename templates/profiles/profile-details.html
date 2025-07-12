@@ -22,8 +22,8 @@
              data-animation-duration="1500" data-animation-delay="750">
 
         <a href="{% url 'edit-profile' request.user.pk %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">edit profile </a>
-        <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">delete profile </a>
-        <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-3">change password </a>
+        <a href="{% url 'delete-profile' request.user.pk %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">delete profile </a>
+        <a href="{% url 'password-change' %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-3">change password </a>
 
     </div>
 </section>

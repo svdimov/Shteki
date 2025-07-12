@@ -2,13 +2,13 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.views import LogoutView, LoginView
-from django.http.response import HttpResponseRedirect
+
 from django.shortcuts import get_object_or_404
 
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
-from accounts.forms import AppUserCreationForm, ProfileEditForm, CustomAuthenticationForm
+from accounts.forms import AppUserCreationForm, ProfileEditForm, CustomAuthenticationForm, CustomChangePasswordForm
 from accounts.models import Profile
 
 UserModel = get_user_model()
@@ -78,3 +78,25 @@ class ProfileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         # This ensures a user can only delete their own account.
         # self.get_object() safely retrieves the user instance from the URL's pk.
         return self.request.user == self.get_object()
+
+
+class ChangePasswordView(auth_views.PasswordChangeView):
+    template_name = 'profiles/change-password.html'
+    success_url = reverse_lazy('password-change-done')
+    form_class = CustomChangePasswordForm
+
+
+
+
+
+class ChangePasswordDoneView(auth_views.PasswordChangeDoneView):
+    template_name = 'profiles/change-password-done.html'
+
+
+
+
+
+   #
+   #  path("password-change/done/", auth_views.PasswordChangeDoneView.as_view(
+   #      template_name='profiles/change-password-done.html'
+   #  ), name='password_change_done'),
