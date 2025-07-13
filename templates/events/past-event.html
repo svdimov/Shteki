@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/events.css' %}" media="screen">
+
+
+<section class="u-border-1 u-border-palette-1-base u-clearfix u-image u-section-2" id="sec-0ed1">
+  <div class="u-clearfix u-sheet u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-sheet-1">
+
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+      <h3 class="u-text u-text-default u-text-1">Past Events</h3>
+      <form method="get" style="display: flex; align-items: center;">
+        <input type="text" name="q" placeholder="Search past events..." value="{{ query|default:'' }}" style="padding: 6px 10px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9rem; margin-right: 6px;">
+        <button type="submit" style="padding: 6px 12px; background-color: #f9844a; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Search</button>
+      </form>
+    </div>
+
+    {% if past_events %}
+      {% for event in past_events %}
+        <div class="u-align-left u-container-align-left u-container-style u-group u-palette-1-light-3 u-radius u-shape-round u-group-1"
+             data-animation-name="customAnimationIn"
+             data-animation-duration="1500"
+             data-animation-delay="0">
+          <div class="u-container-layout u-container-layout-2">
+
+            <img src="{% if event.image1 %}{{ event.image1.url }}{% else %}{% static 'images/452545.jpg' %}{% endif %}" alt="{{ event.name }}"
+                 class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-2"
+                 data-animation-name="customAnimationIn"
+                 data-animation-duration="1500"
+                 data-animation-delay="250">
+
+            <img src="{% if event.image2 %}{{ event.image2.url }}{% else %}{% static 'images/photo-1519904981063-b0cf448d479e.jpeg' %}{% endif %}" alt="{{ event.name }}"
+                 class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-3"
+                 data-animation-name="customAnimationIn"
+                 data-animation-duration="1500"
+                 data-animation-delay="250">
+
+            <img src="{% if event.image3 %}{{ event.image3.url }}{% else %}{% static 'images/2133123.jpg' %}{% endif %}" alt="{{ event.name }}"
+                 class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-4"
+                 data-animation-name="customAnimationIn"
+                 data-animation-duration="1500"
+                 data-animation-delay="250">
+
+            <h3 class="u-align-center u-text u-text-2">{{ event.name }}</h3>
+            <div class="u-align-center u-border-3 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+            <a href="#" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">More info</a>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h3 class="center-text">No past events.</h3>
+    {% endif %}
+
+  </div>
+</section>
+
+
+{% endblock %}

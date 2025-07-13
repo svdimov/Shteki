@@ -1,0 +1,12 @@
+from django.urls.conf import path
+
+from events import views
+
+urlpatterns = [
+    path('new-events/', views.NewEventView.as_view(), name='new-events'),
+    path('events/', views.PastEventView.as_view(), name='past-events'),
+
+    path('evetnts/create/', views.CreateEventView.as_view(), name='create-event'),
+     path('events/<int:pk>/', views.EventDetailView.as_view(), name='details-event'),
+
+]

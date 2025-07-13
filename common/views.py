@@ -9,5 +9,4 @@ from django.views.generic.base import TemplateView
 class HomePageView(TemplateView):
     template_name = 'index.html'
 
-# class ContactPageView(TemplateView):
-#     template_name = 'contacts.html'
+
