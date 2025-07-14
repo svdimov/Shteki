@@ -42,7 +42,7 @@
 
             <h3 class="u-align-center u-text u-text-2">{{ event.name }}</h3>
             <div class="u-align-center u-border-3 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
-            <a href="{% url 'details-event' event.pk %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">More info</a>
+            <a href="{% url 'event-details' event.pk  %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">More info</a>
           </div>
         </div>
       {% endfor %}

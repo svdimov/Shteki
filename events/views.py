@@ -1,11 +1,16 @@
+import json
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query_utils import Q
+from django.http.response import JsonResponse
 from django.urls.base import reverse_lazy
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.utils import timezone
+
+from events.choices import StatusChoice
 from events.froms import CreateEventForm, DetailsEventForm
 from events.models import Event
 
@@ -86,3 +91,15 @@ class EventDetailView(LoginRequiredMixin,DetailView):
         context = super().get_context_data(**kwargs)
         context['event'] = self.object
         return context
+
+# class UpdateEventStatusView(LoginRequiredMixin, View):
+#     def post(self, request, pk):
+#         event = Event.objects.get(pk=pk)
+#         data = json.loads(request.body)
+#         status = data.get('status')
+#
+#         if status in StatusChoice.values:
+#             event.status = status
+#             event.save()
+#             return JsonResponse({'success': True})
+#         return JsonResponse({'success': False, 'error': 'Invalid status'}, status=400)

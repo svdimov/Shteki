@@ -19,6 +19,7 @@ class EventBaseForm(forms.ModelForm):
             'image1': forms.FileInput(attrs={'placeholder': 'Event Image 1'}),
             'image2': forms.FileInput(attrs={'placeholder': 'Event Image 2'}),
             'image3': forms.FileInput(attrs={'placeholder': 'Event Image 3'}),
+            'status': forms.Select(attrs={'class': 'u-select-style'}),
         }
 
 
