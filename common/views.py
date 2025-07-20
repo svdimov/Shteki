@@ -10,3 +10,4 @@ class HomePageView(TemplateView):
     template_name = 'index.html'
 
 
+

@@ -1,8 +1,9 @@
 import json
+from profile import Profile
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query_utils import Q
-from django.http.response import JsonResponse
+from accounts.models import Profile
 from django.urls.base import reverse_lazy
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
@@ -10,7 +11,9 @@ from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django.utils import timezone
 
-from events.choices import StatusChoice
+
+from common.models import EventParticipation
+
 from events.forms import CreateEventForm, DetailsEventForm
 from events.models import Event
 
@@ -60,15 +63,22 @@ class CreateEventView(CreateView):
     form_class = CreateEventForm
 
 
-class EventDetailView(LoginRequiredMixin,DetailView):
+class EventDetailView(LoginRequiredMixin, DetailView):
     model = Event
-    form_class = DetailsEventForm
     template_name = 'events/events-details.html'
     context_object_name = 'event'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['event'] = self.object
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        event = self.object
 
+        # All participants who chose "Will go"
+        participants = EventParticipation.objects.filter(event=event, status='Will go').select_related('user')
 
+        # Get related profiles (optional optimization)
+        profiles = Profile.objects.filter(user__in=[p.user for p in participants])
+
+        context['participants'] = profiles
+        context['will_go_count'] = participants.count()
+
+        return context

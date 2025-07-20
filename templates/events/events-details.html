@@ -8,100 +8,45 @@
             <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">edit event </a>
             <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">delete event </a>
             <div class="u-form u-form-1">
-                <form method="post" action="{% url 'event-details' event.pk %}"
-                      class="u-clearfix u-form-horizontal u-form-spacing-10 u-inner-form" source="email" name="form-1"
+                <form id="status-form" class="u-clearfix u-form-horizontal u-form-spacing-10 u-inner-form"
                       style="padding: 10px;">
                     <div class="u-form-email u-form-group">
-                        <label for="email-585c" class="u-label u-text-color-var u-label-1">Status </label>
-                        <input type="email" placeholder="Will go " id="email-585c" name="status"
-                               class="u-input u-input-rectangle u-radius u-input-1">
+                        <label for="status-input" class="u-label u-text-color-var u-label-1">Status</label>
+                        <select id="status-input" name="status" class="u-input u-input-rectangle u-radius u-input-1">
+                            <option value="Will go">Will go</option>
+                            <option value="Maybe">Maybe</option>
+                            <option value="Not going">Not going</option>
+                        </select>
                     </div>
                     <div class="u-align-left u-form-group u-form-submit">
-                        <a href="#" class="u-btn u-btn-submit u-button-style">Save</a>
-                        <input type="submit" value="submit" class="u-form-control-hidden">
+                        <button type="button" id="status-save-btn" class="u-btn u-btn-submit u-button-style">Save
+                        </button>
                     </div>
-                    <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent.</div>
-                    <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors
-                        then try again.
-                    </div>
-                    <input type="hidden" value="" name="recaptchaResponse">
-                    <input type="hidden" name="formServices" value="3474b205-8b3f-ad1c-9978-94b908b4a057">
                 </form>
+
             </div>
-            <h3 class="u-text u-text-default u-text-palette-2-base u-text-1">NAME EVENT</h3>
+            <h3 class="u-text u-text-default u-text-palette-2-base u-text-1">{{ event.name }}</h3>
             <div class="custom-expanded u-align-center u-container-align-center u-container-style u-group u-radius u-shape-round u-group-1">
                 <div class="u-container-layout u-container-layout-1">
                     <div class="u-container-style u-expanded-width u-group u-radius u-shape-round u-group-2">
                         <div class="u-container-layout u-container-layout-2">
-                            <p class="u-text u-text-default u-text-2">16 people will go: </p>
+                            <p class="u-text u-text-default u-text-2">{{ will_go_count }} people will go: </p>
                             <div class="u-container-style u-group u-shape-rectangle u-group-3">
                                 <div class="u-container-layout u-container-layout-3">
-                                    <div class="u-container-style u-group u-image u-preserve-proportions u-shape-circle u-image-1"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-4"></div>
-                                    </div>
-                                    <div class="u-container-style u-group u-image u-preserve-proportions u-shape-circle u-image-2"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-5"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-3"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-6"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-4"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-7"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-5"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-8"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-6"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-9"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-7"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-10"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-8"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-11"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-9"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-12"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-10"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-13"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-11"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-14"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-12"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-15"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-13"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-16"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-14"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-17"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-15"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-18"></div>
-                                    </div>
-                                    <div class="u-container-style u-gradient u-group u-image u-preserve-proportions u-shape-circle u-image-16"
-                                         title="user_name">
-                                        <div class="u-container-layout u-container-layout-19"></div>
-                                    </div>
+
+                                    {% for profile in participants %}
+                                        <div class="u-container-style u-group u-image u-preserve-proportions u-shape-circle"
+                                             title="{{ profile.full_name }}"
+                                             style="background-image: url('{{ profile.profile_picture_or_default }}'); background-size: cover; width: 53px; height: 53px; display: inline-block; margin: 4px;">
+                                            <div class="u-container-layout"></div>
+                                        </div>
+                                    {% empty %}
+                                        <p>No participants yet.</p>
+                                    {% endfor %}
+
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -122,7 +67,7 @@
                         <div class="u-gallery-inner u-gallery-inner-1">
                             <div class="u-effect-fade u-gallery-item u-gallery-item-1">
                                 <div class="u-back-slide" data-image-width="656" data-image-height="656">
-                                    <img class="u-back-image u-expanded" src="{{ event.image1_url}}">
+                                    <img class="u-back-image u-expanded" src="{{ event.image1_url }}">
                                 </div>
                                 <div class="u-over-slide u-shading u-over-slide-1"></div>
                             </div>
@@ -188,5 +133,33 @@
         </div>
     </section>
 
+    <script>
+        document.getElementById('status-save-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const statusValue = document.getElementById('status-input').value;
+            const eventId = {{ event.id }};
+            const csrfToken = '{{ csrf_token }}';
+
+            fetch(`/api/events/${eventId}/status/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({status: statusValue})
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Status saved successfully!");
+                    } else {
+                        alert("Failed to save status.");
+                    }
+                })
+                .catch(err => {
+                    alert("Error communicating with server.");
+                });
+        });
+    </script>
 
 {% endblock %}
