@@ -30,6 +30,12 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 8,
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,7 +48,8 @@ INSTALLED_APPS = [
     'common.apps.CommonConfig',
     'accounts.apps.AccountsConfig',
     'photos.apps.PhotosConfig',
-    'events.apps.EventsConfig'
+    'events.apps.EventsConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
