@@ -26,29 +26,27 @@
                          data-animation-name="customAnimationIn"
                          data-animation-duration="1500"
                          data-animation-delay="0">
+                        ...
                         <div class="u-container-layout u-container-layout-2">
 
-                            <img src="
 
-                                    {% if event.image1 %}{{ event.image1.url }}{% else %}{% static 'images/452545.jpg' %}{% endif %}"
+                            <img src="{{ event.image1_url }}"
                                  alt="{{ event.name }}"
                                  class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-2"
                                  data-animation-name="customAnimationIn"
                                  data-animation-duration="1500"
                                  data-animation-delay="250">
 
-                            <img src="
 
-                                    {% if event.image2 %}{{ event.image2.url }}{% else %}{% static 'images/photo-1519904981063-b0cf448d479e.jpeg' %}{% endif %}"
+                            <img src="{{ event.image2_url }}"
                                  alt="{{ event.name }}"
                                  class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-3"
                                  data-animation-name="customAnimationIn"
                                  data-animation-duration="1500"
                                  data-animation-delay="250">
 
-                            <img src="
 
-                                    {% if event.image3 %}{{ event.image3.url }}{% else %}{% static 'images/2133123.jpg' %}{% endif %}"
+                            <img src="{{ event.image3_url }}"
                                  alt="{{ event.name }}"
                                  class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-4"
                                  data-animation-name="customAnimationIn"
@@ -61,6 +59,7 @@
                                class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">More
                                 info</a>
                         </div>
+                        ...
                     </div>
                 {% endfor %}
             {% else %}

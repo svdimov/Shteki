@@ -66,9 +66,9 @@ class EventDetailView(LoginRequiredMixin,DetailView):
     template_name = 'events/events-details.html'
     context_object_name = 'event'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['event'] = self.object
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['event'] = self.object
+    #     return context
 
 

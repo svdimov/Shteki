@@ -1,7 +1,5 @@
-
 from django.conf import settings
 from django.core.validators import FileExtensionValidator
-
 
 from django.db import models
 from django.utils import timezone
@@ -16,7 +14,7 @@ class Event(models.Model):
 
     location = models.CharField(max_length=255)
 
-    location_url = models.URLField(blank=True,null=True)
+    location_url = models.URLField(blank=True, null=True)
 
     description = models.TextField(blank=True, null=True)
 
@@ -30,8 +28,6 @@ class Event(models.Model):
     start_date = models.DateField()
 
     city = models.CharField(max_length=100)
-
-
 
     image1 = models.ImageField(
         upload_to='event_images/',
@@ -71,19 +67,38 @@ class Event(models.Model):
         null=True
     )
 
+    @property
+    def image1_url(self):
+        if self.image1 and hasattr(self.image1, 'url'):
+            return self.image1.url
 
+        return '/static/images/452545.jpg'
+
+    @property
+    def image2_url(self):
+        if self.image2 and hasattr(self.image2, 'url'):
+            return self.image2.url
+
+        return '/static/images/photo-1519904981063-b0cf448d479e.jpeg'
+
+    @property
+    def image3_url(self):
+        if self.image3 and hasattr(self.image3, 'url'):
+            return self.image3.url
+
+        return '/static/images/2133123.jpg'
 
     def __str__(self):
         return self.name
 
     @property
     def end_date(self):
-        """Calculate end date based on start_date and days"""
+
         if self.days:
             return self.start_date + timedelta(days=self.days)
         return self.start_date
 
     @property
     def is_past_event(self):
-        """Determine if event is finished"""
+
         return self.end_date < timezone.now().date()
