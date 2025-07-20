@@ -55,7 +55,7 @@ class PastEventView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'events/past-event.html'
     context_object_name = 'past_events'
-    paginate_by = 6  #
+    paginate_by = 8  #
 
     def get_queryset(self):
         today = timezone.now().date()
