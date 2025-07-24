@@ -37,7 +37,8 @@ class PastEventView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'events/past-event.html'
     context_object_name = 'past_events'
-    paginate_by = 8  #
+    paginate_by = 8
+
 
     def get_queryset(self):
         today = timezone.now().date()
@@ -62,6 +63,18 @@ class CreateEventView(CreateView):
     success_url = reverse_lazy('new-events')
     form_class = CreateEventForm
 
+    def form_valid(self, form):
+        form.instance.creator = self.request.user
+        response = super().form_valid(form)
+        # Add creator as participant with "Will go" status
+        EventParticipation.objects.get_or_create(
+            event=self.object,
+            user=self.request.user,
+            defaults={'status': 'Will go'}
+        )
+        return response
+
+
 
 class EventDetailView(LoginRequiredMixin, DetailView):
     model = Event
@@ -80,5 +93,8 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 
         context['participants'] = profiles
         context['will_go_count'] = participants.count()
+        if event.creator:
+            context['creator_profile'] = getattr(event.creator, 'profile', None)
+
 
         return context

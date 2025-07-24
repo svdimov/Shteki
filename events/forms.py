@@ -6,7 +6,7 @@ from events.models import Event
 class EventBaseForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields = "__all__"
+        exclude = ['creator']
 
         widgets = {
             'name': forms.TextInput(attrs={'placeholder': 'Event Name'}),

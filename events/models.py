@@ -61,7 +61,7 @@ class Event(models.Model):
 
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE, #TODO don not delete events
         related_name='created_events',
         blank=True,
         null=True

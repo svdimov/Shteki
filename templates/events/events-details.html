@@ -23,9 +23,16 @@
                         </button>
                     </div>
                 </form>
-
             </div>
             <h3 class="u-text u-text-default u-text-palette-2-base u-text-1">{{ event.name }}</h3>
+            {% if creator_profile %}
+                <div class="creator-info">
+                    <p class="creator-text">Creator</p>
+                    <img src="{{ creator_profile.profile_picture_or_default }}" alt="{{ creator_profile.full_name }}"
+                         class="u-border-2 u-border-palette-1-base u-image u-image-circle creator-image"
+                         title="{{ creator_profile.full_name }}"">
+                </div>
+            {% endif %}
             <div class="custom-expanded u-align-center u-container-align-center u-container-style u-group u-radius u-shape-round u-group-1">
                 <div class="u-container-layout u-container-layout-1">
                     <div class="u-container-style u-expanded-width u-group u-radius u-shape-round u-group-2">
@@ -54,7 +61,7 @@
             <div class="u-border-2 u-border-palette-1-base u-container-style u-group u-radius u-shape-round u-group-20">
                 <div class="u-container-layout u-valign-top u-container-layout-20">
                     <div class="fr-view u-clearfix u-rich-text u-text u-text-3">
-                        <p style="text-align: center;">DESCRIPTIONS</p>
+                        <p style="text-align: center;">{{ event.description }}</p>
                         <p style="text-align: center;">
                             <br>
                         </p>
@@ -86,14 +93,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="u-expanded-width u-grey-light-2 u-map u-map-1">
-                        <div class="embed-responsive">
-                            <iframe class="embed-responsive-item"
-                                    src="{{ event.location_url }}"
-                                    data-map="JTdCJTIyYWRkcmVzcyUyMiUzQSUyMk1hbmhhdHRhbiUyQyUyME5ldyUyMFlvcmslMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0FudWxsJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCU3RA=="></iframe>
-                        </div>
+
+
+                    <!-- Map Block (Background Image Clickable) -->
+                    <div class="u-expanded-width u-grey-light-2 u-map u-map-1 map-clickable-block">
+                        {% if event.location_url %}
+                            <a href="{{ event.location_url }}" target="_blank" class="map-link">
+                                <div class="map-image-overlay">
+                                    <span class="map-view-text"> Location: {{ event.location }}</span>
+                                </div>
+                            </a>
+                        {% else %}
+                            <div class="map-image-overlay">
+                                <span class="map-view-text"> No Location for: {{ event.location }}</span>
+                            </div>
+                        {% endif %}
                     </div>
-                    <p class="u-text u-text-default u-text-4">Location name , city </p>
+
+
+                    <p class="u-text u-text-default u-text-4">{{ event.location }} , {{ event.city }} </p>
                     <p class="u-text u-text-default u-text-5">4 likes </p><span class="u-icon u-icon-1"><svg
                         class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 50 50" style=""><use
                         xlink:href="#svg-6915"></use></svg><svg class="u-svg-content" viewBox="0 0 50 50" x="0px"
