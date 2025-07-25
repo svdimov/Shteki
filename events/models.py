@@ -5,6 +5,8 @@ from django.db import models
 from django.utils import timezone
 from datetime import timedelta
 
+from django.contrib.auth import get_user_model
+
 from accounts.validators import FileSizeValidator
 from events.choices import StatusChoice
 
@@ -102,3 +104,22 @@ class Event(models.Model):
     def is_past_event(self):
 
         return self.end_date < timezone.now().date()
+
+
+
+
+User = get_user_model()
+
+class EventPost(models.Model):
+    event = models.ForeignKey('Event', on_delete=models.CASCADE, related_name='posts')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+class EventLike(models.Model):
+    event = models.ForeignKey('Event', on_delete=models.CASCADE, related_name='likes')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('event', 'user')

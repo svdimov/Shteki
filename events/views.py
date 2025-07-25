@@ -15,7 +15,7 @@ from django.utils import timezone
 from common.models import EventParticipation
 
 from events.forms import CreateEventForm, DetailsEventForm
-from events.models import Event
+from events.models import Event, EventPost, EventLike
 
 
 class NewEventView(LoginRequiredMixin,TemplateView):
@@ -80,6 +80,7 @@ class EventDetailView(LoginRequiredMixin, DetailView):
     model = Event
     template_name = 'events/events-details.html'
     context_object_name = 'event'
+    pk_url_kwarg = 'event_id'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -91,10 +92,19 @@ class EventDetailView(LoginRequiredMixin, DetailView):
         # Get related profiles (optional optimization)
         profiles = Profile.objects.filter(user__in=[p.user for p in participants])
 
-        context['participants'] = profiles
-        context['will_go_count'] = participants.count()
-        if event.creator:
-            context['creator_profile'] = getattr(event.creator, 'profile', None)
+        creator_profile = getattr(getattr(event, 'creator', None), 'profile', None)
 
+        posts = EventPost.objects.filter(event=event).select_related('user').order_by('-created_at')
+        likes_count = EventLike.objects.filter(event=event).count()
+        liked_by_me = EventLike.objects.filter(event=event, user=self.request.user).exists()
+
+        context.update({
+            'participants': profiles,
+            'will_go_count': participants.count(),
+            'creator_profile': creator_profile,
+            'event_posts': posts,
+            'likes_count': likes_count,
+            'liked_by_me': liked_by_me,
+        })
 
         return context
