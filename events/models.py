@@ -64,7 +64,7 @@ class Event(models.Model):
 
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, #TODO don not delete events
+        on_delete=models.CASCADE,  # TODO don not delete events
         related_name='created_events',
         blank=True,
         null=True
@@ -107,19 +107,23 @@ class Event(models.Model):
         return self.end_date < timezone.now().date()
 
 
-
-
 User = get_user_model()
+
 
 class EventPost(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE, related_name='posts')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    text = models.TextField()
+    text = models.TextField(
+        max_length=100,
+        error_messages={
+            'max_length': 'Text cannot be more than 300 characters.'
+        })
     created_at = models.DateTimeField(auto_now_add=True)
 
     def clean(self):
         if not self.text or not self.text.strip():
             raise ValidationError("Text cannot be empty.")
+
     def __str__(self):
         return self.text  # or any field you want to show
 
