@@ -25,7 +25,7 @@ class NewEventView(LoginRequiredMixin,TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        today = timezone.now().date()
+        today = timezone.localtime().date()
 
         new_events = Event.objects.filter(start_date__gte=today).order_by('start_date')
 
@@ -96,7 +96,7 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 
         creator_profile = getattr(getattr(event, 'creator', None), 'profile', None)
 
-        posts = EventPost.objects.filter(event=event).select_related('user').order_by('-created_at')
+        posts = EventPost.objects.filter(event=event).select_related('user').order_by('created_at')
         likes_count = EventLike.objects.filter(event=event).count()
         liked_by_me = EventLike.objects.filter(event=event, user=self.request.user).exists()
 

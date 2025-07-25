@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.core.validators import FileExtensionValidator
 
 from django.db import models
@@ -116,6 +117,9 @@ class EventPost(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def clean(self):
+        if not self.text or not self.text.strip():
+            raise ValidationError("Text cannot be empty.")
     def __str__(self):
         return self.text  # or any field you want to show
 

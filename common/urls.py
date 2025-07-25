@@ -7,4 +7,5 @@ urlpatterns = [
     path('api/events/<int:pk>/status/', api_views.EventStatusAPI.as_view(), name='api-event-status'),
 
 
+
 ]

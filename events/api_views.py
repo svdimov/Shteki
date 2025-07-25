@@ -47,6 +47,14 @@ class EventPostListCreateView(generics.ListCreateAPIView):
         event = get_object_or_404(Event, pk=self.kwargs['event_id'])
         serializer.save(user=self.request.user, event=event)
 
+    def post(self, request, *args, **kwargs):
+        """Custom POST to support JSON response for AJAX"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        event = get_object_or_404(Event, pk=self.kwargs['event_id'])
+        serializer.save(user=request.user, event=event)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 class EventLikeToggleView(generics.GenericAPIView):
     serializer_class = EventLikeSerializer
     permission_classes = [permissions.IsAuthenticated]
@@ -61,3 +69,39 @@ class EventLikeToggleView(generics.GenericAPIView):
             liked = True
         count = EventLike.objects.filter(event=event).count()
         return Response({'liked': liked, 'likes_count': count})
+
+
+class EditEventPostView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, post_id):
+        post = get_object_or_404(EventPost, id=post_id)
+
+        if post.user != request.user:
+            return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+
+        new_text = request.data.get('text', '').strip()
+        if not new_text:
+            return Response({'error': 'Text cannot be empty.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        post.text = new_text
+        post.save()
+
+        return Response({
+            'message': 'Post updated successfully',
+            'text': post.text,
+            'updated_at': post.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        })
+
+
+class DeleteEventPostView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, post_id):
+        post = get_object_or_404(EventPost, id=post_id)
+
+        if post.user != request.user:
+            return Response({'error': 'Permission denied'}, status=status.HTTP_403_FORBIDDEN)
+
+        post.delete()
+        return Response({'message': 'Post deleted successfully'})
