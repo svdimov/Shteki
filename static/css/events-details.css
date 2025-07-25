@@ -412,7 +412,7 @@
 .u-section-1 .u-icon-1 {
     width: 24px;
     height: 24px;
-    color: rgb(215, 90, 74) !important;
+    color: #D7C14A;
     margin: -28px auto 0 14px;
     padding: 0;
 }
@@ -737,4 +737,91 @@
     font-size: 16px;
     border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+/* === Posts & Likes === */
+.like-section {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.like-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #d75a4a;
+}
+
+.like-btn.liked {
+    color: #f55c24;
+}
+
+#posts-list {
+    margin-top: 20px;
+}
+
+.post-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.post-author-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-author-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.post-date {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+/* === Custom Post Form === */
+.post-form {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.post-form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 570px;
+}
+
+.post-input {
+    flex-grow: 1;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    background-color: #fff;
+}
+
+.post-submit-btn {
+    padding: 10px 20px;
+    background-color: #f55c24;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.post-submit-btn:hover {
+    background-color: #d64d1e;
 }

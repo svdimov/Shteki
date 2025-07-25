@@ -3,6 +3,8 @@ from profile import Profile
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models.query_utils import Q
+from django.shortcuts import redirect
+
 from accounts.models import Profile
 from django.urls.base import reverse_lazy
 from django.views.generic.base import TemplateView, View
@@ -107,4 +109,16 @@ class EventDetailView(LoginRequiredMixin, DetailView):
             'liked_by_me': liked_by_me,
         })
 
+
         return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        content = request.POST.get('text', '').strip()
+        if content:
+            EventPost.objects.create(
+                event=self.object,
+                user=request.user,
+                text=content
+            )
+        return redirect('event-details', event_id=self.object.id)

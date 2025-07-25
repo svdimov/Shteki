@@ -116,6 +116,10 @@ class EventPost(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.text  # or any field you want to show
+
+
 class EventLike(models.Model):
     event = models.ForeignKey('Event', on_delete=models.CASCADE, related_name='likes')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
