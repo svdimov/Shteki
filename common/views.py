@@ -10,4 +10,8 @@ class HomePageView(TemplateView):
     template_name = 'index.html'
 
 
+class AboutAs(TemplateView):
+    template_name = 'about.html'
+
+
 
