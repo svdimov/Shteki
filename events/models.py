@@ -64,7 +64,7 @@ class Event(models.Model):
 
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,  # TODO don not delete events
+        on_delete=models.SET_NULL,
         related_name='created_events',
         blank=True,
         null=True
@@ -125,7 +125,7 @@ class EventPost(models.Model):
             raise ValidationError("Text cannot be empty.")
 
     def __str__(self):
-        return self.text  # or any field you want to show
+        return self.text
 
 
 class EventLike(models.Model):

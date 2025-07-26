@@ -1,4 +1,3 @@
-import json
 from profile import Profile
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -13,14 +12,13 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.utils import timezone
 
-
 from common.models import EventParticipation
 
 from events.forms import CreateEventForm, DetailsEventForm, EditEventForm
 from events.models import Event, EventPost, EventLike
 
 
-class NewEventView(LoginRequiredMixin,TemplateView):
+class NewEventView(LoginRequiredMixin, TemplateView):
     template_name = 'events/new-events.html'
 
     def get_context_data(self, **kwargs):
@@ -34,13 +32,11 @@ class NewEventView(LoginRequiredMixin,TemplateView):
         return context
 
 
-
 class PastEventView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'events/past-event.html'
     context_object_name = 'past_events'
     paginate_by = 8
-
 
     def get_queryset(self):
         today = timezone.now().date()
@@ -59,6 +55,7 @@ class PastEventView(LoginRequiredMixin, ListView):
         context['query'] = self.request.GET.get('q', '').strip()
         return context
 
+
 class CreateEventView(CreateView):
     model = Event
     template_name = 'events/create-event.html'
@@ -75,7 +72,6 @@ class CreateEventView(CreateView):
             defaults={'status': 'Will go'}
         )
         return response
-
 
 
 class EventDetailView(LoginRequiredMixin, DetailView):
@@ -109,7 +105,6 @@ class EventDetailView(LoginRequiredMixin, DetailView):
             'liked_by_me': liked_by_me,
         })
 
-
         return context
 
     def post(self, request, *args, **kwargs):
@@ -142,8 +137,6 @@ class EditEventView(LoginRequiredMixin, UpdateView):
         return event.creator == self.request.user
 
 
-
-
 from django.views.generic import DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
@@ -151,7 +144,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .models import Event
 
-class DeleteEventView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+
+class DeleteEventView(LoginRequiredMixin, DeleteView): #TODO UserPassesTestMixin
     model = Event
     template_name = 'events/event-delete.html'
     context_object_name = 'event'
