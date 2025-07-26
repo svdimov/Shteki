@@ -1,22 +1,22 @@
 import json
 from profile import Profile
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models.query_utils import Q
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 
 from accounts.models import Profile
 from django.urls.base import reverse_lazy
 from django.views.generic.base import TemplateView, View
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.utils import timezone
 
 
 from common.models import EventParticipation
 
-from events.forms import CreateEventForm, DetailsEventForm
+from events.forms import CreateEventForm, DetailsEventForm, EditEventForm
 from events.models import Event, EventPost, EventLike
 
 
@@ -122,3 +122,47 @@ class EventDetailView(LoginRequiredMixin, DetailView):
                 text=content
             )
         return redirect('event-details', event_id=self.object.id)
+
+
+class EditEventView(LoginRequiredMixin, UpdateView):
+    model = Event
+    form_class = EditEventForm
+    template_name = 'events/edit-event.html'
+    context_object_name = 'event'
+
+    def get_object(self, queryset=None):
+        event_id = self.kwargs['event_id']
+        return get_object_or_404(Event, id=event_id)
+
+    def get_success_url(self):
+        return reverse_lazy('event-details', kwargs={'event_id': self.object.id})
+
+    def test_func(self):
+        event = self.get_object()
+        return event.creator == self.request.user
+
+
+
+
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+from .models import Event
+
+class DeleteEventView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Event
+    template_name = 'events/event-delete.html'
+    context_object_name = 'event'
+
+    def get_object(self, queryset=None):
+        event_id = self.kwargs['event_id']
+        return get_object_or_404(Event, id=event_id)
+
+    def get_success_url(self):
+        return reverse_lazy('new-events')
+
+    def test_func(self):
+        event = self.get_object()
+        return event.creator == self.request.user

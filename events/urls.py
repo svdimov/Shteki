@@ -12,6 +12,8 @@ urlpatterns = [
     path('event/create/', views.CreateEventView.as_view(), name='create-event'),
     path('events/<int:event_id>/', include([
         path('', views.EventDetailView.as_view(), name='event-details'),
+        path('edit/', views.EditEventView.as_view(), name='edit-event'),
+        path('delete/', views.DeleteEventView.as_view(), name='delete-event'),
         path('posts/', EventPostListCreateView.as_view(), name='event-posts'),
         path('like/', EventLikeToggleView.as_view(), name='event-like'),
 
@@ -19,5 +21,3 @@ urlpatterns = [
     path('api/posts/<int:post_id>/edit/', EditEventPostView.as_view(), name='edit-event-post'),
     path('api/posts/<int:post_id>/delete/', DeleteEventPostView.as_view(), name='delete-event-post'),
 ]
-
-

@@ -5,8 +5,8 @@
     <section class="u-align-center u-clearfix u-image u-shading u-section-1" id="carousel_790c" data-image-width="1980"
              data-image-height="1243">
         <div class="u-clearfix u-sheet u-valign-middle-lg u-sheet-1">
-            <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">edit event </a>
-            <a href="" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">delete event </a>
+            <a href="{% url 'edit-event' event.pk %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-1">edit event </a>
+            <a href="{% url 'delete-event' event.pk %}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">delete event </a>
             <div class="u-form u-form-1">
                 <form id="status-form" class="u-clearfix u-form-horizontal u-form-spacing-10 u-inner-form"
                       style="padding: 10px;">

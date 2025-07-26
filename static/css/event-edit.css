@@ -137,3 +137,25 @@
     margin-right: auto;
   }
 }
+ .custom-save-button {
+  background-color: #f58d54;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.custom-save-button:hover {
+  background-color: #e6763d;
+}
+
+.custom-save-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(245, 141, 84, 0.4);
+}
