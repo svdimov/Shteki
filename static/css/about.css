@@ -707,7 +707,7 @@
 
 .u-section-4 .u-list-1 {
     margin-top: 55px;
-    margin-bottom: 300px;
+    margin-bottom: 150px;
     grid-template-rows: repeat(1, auto);
 }
 
@@ -1239,9 +1239,9 @@
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin: 40px 0 20px 0;
+    margin: 100px 0 100px 0;
     padding: 18px;
-    background: #222;
+
     border-radius: 8px;
     z-index: 100;
     position: relative;
@@ -1265,3 +1265,4 @@
     background: #F58D54;
     color: #000;
 }
+
