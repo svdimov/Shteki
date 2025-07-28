@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status as http_status
 from django.shortcuts import get_object_or_404
 
+
 from events.models import Event
 from common.models import EventParticipation
 from events.choices import StatusChoice
@@ -25,3 +26,6 @@ class EventStatusAPI(APIView):
         )
 
         return Response({'message': 'Status updated'}, status=http_status.HTTP_200_OK)
+
+
+
