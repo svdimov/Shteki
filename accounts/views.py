@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.contrib.auth.views import LogoutView, LoginView
+from django.contrib.auth.views import LogoutView, LoginView, PasswordResetConfirmView
 
 from django.shortcuts import get_object_or_404
 
@@ -10,6 +10,10 @@ from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
 from accounts.forms import AppUserCreationForm, ProfileEditForm, CustomAuthenticationForm, CustomChangePasswordForm
 from accounts.models import Profile
+from datetime import timedelta
+from django.utils import timezone
+from django.contrib.auth.forms import PasswordResetForm
+from django.shortcuts import render
 
 UserModel = get_user_model()
 
@@ -41,6 +45,50 @@ class RegisterView(CreateView):
 class CustomLoginView(LoginView):
     authentication_form = CustomAuthenticationForm
     template_name = 'profiles/login.html'
+
+    max_attempts = 3
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            email = request.POST.get('username')
+            try:
+                user = UserModel.objects.get(email=email)
+                if user.account_locked_until and user.account_locked_until > timezone.now():
+                    return render(request, 'profiles/account-login.html')
+            except UserModel.DoesNotExist:
+                pass
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        user = form.get_user()
+        user.failed_login_attempts = 0
+        user.save()
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        email = form.data.get('username')
+        try:
+            user = UserModel.objects.get(email=email)
+            if user.is_locked:
+                return render(self.request, 'profiles/account-login.html')
+
+            user.failed_login_attempts += 1
+            if user.failed_login_attempts >= self.max_attempts:
+                user.is_locked = True
+                user.failed_login_attempts = 0  # reset attempts
+                reset_form = PasswordResetForm({'email': email})
+                if reset_form.is_valid():
+                    reset_form.save(
+                        request=self.request,
+                        email_template_name='profiles/password_reset_email.html',
+                        subject_template_name='profiles/password_reset_subject.txt'
+                    )
+            user.save()
+        except UserModel.DoesNotExist:
+            pass
+
+        return super().form_invalid(form)
 
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
@@ -87,6 +135,16 @@ class ChangePasswordView(auth_views.PasswordChangeView):
 
 class ChangePasswordDoneView(auth_views.PasswordChangeDoneView):
     template_name = 'profiles/change-password-done.html'
+
+
+class CustomPasswordResetConfirmView(PasswordResetConfirmView):
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        user = self.user
+        user.is_locked = False
+        user.failed_login_attempts = 0
+        user.save()
+        return response
 
 #
 #  path("password-change/done/", auth_views.PasswordChangeDoneView.as_view(

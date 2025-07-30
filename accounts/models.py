@@ -31,6 +31,18 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         default=False,
     )
 
+    failed_login_attempts = models.PositiveIntegerField(
+        default=0,
+    )
+
+    is_locked = models.BooleanField(
+        default=False,
+    )
+    account_locked_until = models.DateTimeField(
+        null=True,
+        blank=True,
+        default=None,
+    )
     objects = AppUserManager()
 
 

@@ -66,6 +66,14 @@ class CustomAuthenticationForm(AuthenticationForm):
 
     }
 
+    def confirm_login_allowed(self, user):
+        if getattr(user, 'is_locked', False) or getattr(user, 'failed_login_attempts', 0) >= 3:
+            raise forms.ValidationError(
+                'Your account is locked due to too many failed login attempts.',
+                code='locked',
+            )
+        super().confirm_login_allowed(user)
+
 class ProfileEditForm(ProfileBaseForm):
     class Meta:
         model = Profile

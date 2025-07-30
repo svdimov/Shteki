@@ -64,7 +64,7 @@ class Event(models.Model):
 
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
+        on_delete=models.SET_NULL, # не се изтрива събитието, ако потребителят е изтрит не е чата
         related_name='created_events',
         blank=True,
         null=True
