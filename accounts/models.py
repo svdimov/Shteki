@@ -91,3 +91,5 @@ class Profile(models.Model):
             pass
         super().save(*args, **kwargs)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} ({self.user.email})" if self.first_name or self.last_name else self.user.email

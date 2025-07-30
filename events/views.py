@@ -1,6 +1,6 @@
 from profile import Profile
 
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.db.models.query_utils import Q
 from django.shortcuts import redirect, get_object_or_404
 
@@ -56,11 +56,12 @@ class PastEventView(LoginRequiredMixin, ListView):
         return context
 
 
-class CreateEventView(CreateView):
+class CreateEventView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Event
     template_name = 'events/create-event.html'
     success_url = reverse_lazy('new-events')
     form_class = CreateEventForm
+    permission_required = 'events.add_event'
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -92,7 +93,7 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 
         creator_profile = getattr(getattr(event, 'creator', None), 'profile', None)
 
-        posts = EventPost.objects.filter(event=event).select_related('user').order_by('created_at')
+        posts = EventPost.objects.filter(event=event).select_related('user__profile').order_by('created_at')
         likes_count = EventLike.objects.filter(event=event).count()
         liked_by_me = EventLike.objects.filter(event=event, user=self.request.user).exists()
 
@@ -119,11 +120,12 @@ class EventDetailView(LoginRequiredMixin, DetailView):
         return redirect('event-details', event_id=self.object.id)
 
 
-class EditEventView(LoginRequiredMixin, UpdateView):
+class EditEventView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Event
     form_class = EditEventForm
     template_name = 'events/edit-event.html'
     context_object_name = 'event'
+    permission_required = 'events.change_event'
 
     def get_object(self, queryset=None):
         event_id = self.kwargs['event_id']
@@ -145,10 +147,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Event
 
 
-class DeleteEventView(LoginRequiredMixin, DeleteView): #TODO UserPassesTestMixin
+class DeleteEventView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView, ):
     model = Event
     template_name = 'events/event-delete.html'
     context_object_name = 'event'
+    permission_required = 'events.delete_event'
 
     def get_object(self, queryset=None):
         event_id = self.kwargs['event_id']

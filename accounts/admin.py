@@ -12,6 +12,7 @@ class AppUserAdmin(UserAdmin):
     list_display = ("email", "is_active", "is_staff")
     form = AppUserChangeForm
     add_form = AppUserCreationForm
+    search_fields = ["email"]
 
     fieldsets = (
         (None, {"fields": ("email", "password")}),
