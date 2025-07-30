@@ -25,10 +25,10 @@ class RegisterView(CreateView):
     #     return HttpResponseRedirect(self.get_success_url())
     def form_valid(self, form):
         response = super().form_valid(form)
-        # Note: Signal for profile creation
 
-        if response.status_code in [301, 302]:
-            login(self.request, self.object)
+        user = self.object
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login(self.request, user)
 
         return response
 
@@ -68,7 +68,6 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return reverse('profile-details', kwargs={'pk': self.object.pk})
 
 
-
 class ProfileDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = UserModel
     template_name = 'profiles/delete-profile.html'
@@ -86,17 +85,10 @@ class ChangePasswordView(auth_views.PasswordChangeView):
     form_class = CustomChangePasswordForm
 
 
-
-
-
 class ChangePasswordDoneView(auth_views.PasswordChangeDoneView):
     template_name = 'profiles/change-password-done.html'
 
-
-
-
-
-   #
-   #  path("password-change/done/", auth_views.PasswordChangeDoneView.as_view(
-   #      template_name='profiles/change-password-done.html'
-   #  ), name='password_change_done'),
+#
+#  path("password-change/done/", auth_views.PasswordChangeDoneView.as_view(
+#      template_name='profiles/change-password-done.html'
+#  ), name='password_change_done'),

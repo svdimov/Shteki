@@ -20,7 +20,6 @@
                     <span class="u-btn u-btn-ghost u-btn-2" style="visibility: hidden;">placeholder</span>
                 {% endif %}
             </div>
-
             <div class="u-form u-form-1">
                 <form id="status-form" class="u-clearfix u-form-horizontal u-form-spacing-10 u-inner-form"
                       style="padding: 10px;">
@@ -131,7 +130,7 @@
                                 <h5 class="u-text u-text-default u-text-6">
                                     <span id="post-content-{{ post.id }}">{{ post.text }}</span>
                                 </h5>
-                                <small>{{ post.created_at|date:"d M Y H:i:s" }}</small>
+                                <small>{{ post.created_at|date:"d M Y H:i" }}</small>
 
 
                                 {% if request.user == post.user or perms.events.delete_eventpost %}
@@ -148,7 +147,6 @@
                                         <button onclick="cancelEdit({{ post.id }})">Cancel</button>
                                     </div>
                                 {% endif %}
-
                             </div>
                         {% endfor %}
 
@@ -191,18 +189,19 @@
   </svg>
 
 </span>
-                    <div class="custom-post-wrapper">
-                        <form method="post" id="custom-post-form" class="custom-post-form">
+
+
+                    <div class="u-form u-form-2">
+                        <form method="post" action="{% url 'event-details' event.id %}" class="post-form">
                             {% csrf_token %}
-                            <div class="custom-post-group">
-                                <input type="text" name="text" id="custom-post-input" placeholder="Write a comment..."
-                                       required>
-                                <button type="submit" id="custom-post-btn">Post</button>
+                            <div class="post-form-group">
+                                <input type="text" name="text" class="post-input" placeholder="Add comment..." required>
+                                <button type="submit" class="post-submit-btn">Add comment</button>
                             </div>
                         </form>
+
+
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -238,21 +237,21 @@
     </script>
     <!-- Status Form -->
     <script>
-        document.getElementById('custom-post-form').addEventListener('submit', function (e) {
+        document.getElementById('post-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const input = document.getElementById('custom-post-input');
+            const input = document.getElementById('post-text');
             const text = input.value.trim();
             if (!text) return;
 
             const csrfToken = '{{ csrf_token }}';
             const eventId = {{ event.id }};
 
-            fetch(`/events/{{ event.id }}/posts/`, {
+            fetch(`/events/${eventId}/posts/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
+                    'X-CSRFToken': csrfToken
                 },
                 body: JSON.stringify({text})
             })
@@ -263,29 +262,28 @@
                 .then(data => {
                     input.value = '';
 
-                    const fullName = "{{ request.user.profile.full_name|escapejs }}";
+                    const fullName = "{{ request.user.profile.full_name }}";
                     const now = new Date(data.created_at || Date.now()).toLocaleString();
 
                     const postContainer = document.createElement('div');
                     postContainer.className = 'u-text u-text-default u-text-7';
                     postContainer.id = `post-${data.id}`;
                     postContainer.innerHTML = `
-                <strong>${fullName}</strong>:
-                <h5 class="u-text u-text-default u-text-6">
-                    <span id="post-content-${data.id}">${data.text}</span>
-                </h5>
-                <small>${now}</small>
-                <div class="post-actions">
-                    <button onclick="showEditForm(${data.id})">Edit</button>
-                    <button onclick="deletePost(${data.id})">Delete</button>
-                </div>
-                <div id="edit-form-${data.id}" class="edit-form" style="display: none;">
-                    <input type="text" id="edit-input-${data.id}" value="${data.text}">
-                    <button onclick="submitEdit(${data.id})">Save</button>
-                    <button onclick="cancelEdit(${data.id})">Cancel</button>
-                </div>
-            `;
+          <strong>${fullName}</strong>:
+          <span id="post-content-${data.id}">${data.text}</span><br>
+          <small>${now}</small>
+          <div class="post-actions">
+              <button onclick="showEditForm(${data.id})">Edit</button>
+              <button onclick="deletePost(${data.id})">Delete</button>
+          </div>
+          <div id="edit-form-${data.id}" class="edit-form" style="display: none;">
+              <input type="text" id="edit-input-${data.id}" value="${data.text}">
+              <button onclick="submitEdit(${data.id})">Save</button>
+              <button onclick="cancelEdit(${data.id})">Cancel</button>
+          </div>
+        `;
 
+                    // Add it to the container
                     document.querySelector('.u-container-layout-21').appendChild(postContainer);
                 })
                 .catch(err => {
@@ -294,7 +292,6 @@
                 });
         });
     </script>
-
 
     <script>
         function showEditForm(postId) {

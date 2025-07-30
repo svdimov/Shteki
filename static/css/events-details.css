@@ -419,7 +419,7 @@
 .u-section-1 .u-text-6 {
     font-weight: 700;
     text-shadow: 2px -2px 8px rgba(128, 128, 128, 1);
-    margin: 15px
+    margin: 15px auto 0 14px;
 }
 
 .u-section-1 .u-text-7 {
@@ -853,53 +853,4 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 0.9rem;
-}
-
-
-/* === Custom Post Form Override === */
-.custom-post-wrapper {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-}
-
-.custom-post-form {
-    width: 100%;
-    max-width: 600px;
-}
-
-.custom-post-group {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-#custom-post-input {
-    flex: 1;
-    padding: 12px 14px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    background: #fff;
-    outline: none;
-    transition: box-shadow 0.2s;
-}
-
-#custom-post-input:focus {
-    box-shadow: 0 0 0 2px rgba(245, 92, 36, 0.3);
-}
-
-#custom-post-btn {
-    padding: 10px 20px;
-    background-color: #f55c24;
-    border: none;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#custom-post-btn:hover {
-    background-color: #d64d1e;
 }

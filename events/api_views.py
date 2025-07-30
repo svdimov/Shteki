@@ -11,9 +11,9 @@ from .serializers import EventPostSerializer, EventLikeSerializer
 from django.shortcuts import get_object_or_404
 
 
+
 class PastEventsAPIPagination(PageNumberPagination):
     page_size = 8
-
 
 class PastEventsAPI(APIView):
     permission_classes = [IsAuthenticated]
@@ -32,9 +32,12 @@ class PastEventsAPI(APIView):
         return paginator.get_paginated_response(serializer.data)
 
 
+
 class EventPostListCreateView(generics.ListCreateAPIView):
     serializer_class = EventPostSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
 
     def get_queryset(self):
         event_id = self.kwargs['event_id']
@@ -51,7 +54,6 @@ class EventPostListCreateView(generics.ListCreateAPIView):
         event = get_object_or_404(Event, pk=self.kwargs['event_id'])
         serializer.save(user=request.user, event=event)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
 
 class EventLikeToggleView(generics.GenericAPIView):
     serializer_class = EventLikeSerializer
@@ -70,7 +72,7 @@ class EventLikeToggleView(generics.GenericAPIView):
 
 
 class EditEventPostView(APIView):
-    permission_classes = [permissions.IsAuthenticated, DjangoModelPermissions]
+    permission_classes = [permissions.IsAuthenticated,DjangoModelPermissions]
 
     def post(self, request, post_id):
         post = get_object_or_404(EventPost, id=post_id)

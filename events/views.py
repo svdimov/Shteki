@@ -93,7 +93,7 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 
         creator_profile = getattr(getattr(event, 'creator', None), 'profile', None)
 
-        posts = EventPost.objects.filter(event=event).select_related('user__profile').order_by('created_at')
+        posts = EventPost.objects.filter(event=event).select_related('user').order_by('created_at')
         likes_count = EventLike.objects.filter(event=event).count()
         liked_by_me = EventLike.objects.filter(event=event, user=self.request.user).exists()
 
