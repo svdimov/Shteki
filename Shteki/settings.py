@@ -155,5 +155,5 @@ LOGOUT_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = 'login'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
+DEFAULT_CONTACT_EMAIL = 'izkriveni-shteki@abv.bg'
 

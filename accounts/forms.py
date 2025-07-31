@@ -104,4 +104,3 @@ class CustomChangePasswordForm(PasswordChangeForm):
 
         self.fields['new_password1'].help_text = ''
         self.fields['new_password2'].help_text = ''
-
