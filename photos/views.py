@@ -30,7 +30,13 @@ class PhotosView(LoginRequiredMixin, ListView):
 
 
 
-class PhotoAddView(LoginRequiredMixin,CreateView):
+from django.views.generic.edit import FormView
+from django.shortcuts import get_object_or_404, redirect
+from .forms import PhotoUploadForm
+from events.models import Event
+from photos.models import Photo
+
+class PhotoAddView(LoginRequiredMixin, FormView):
     template_name = 'photos/photos-detail.html'
     form_class = PhotoUploadForm
 
@@ -44,12 +50,31 @@ class PhotoAddView(LoginRequiredMixin,CreateView):
         context['photos'] = self.event.user_photos.select_related('user__profile').all()
         return context
 
-    def form_valid(self, form):
-        photo = form.save(commit=False)
-        photo.event = self.event
-        photo.user = self.request.user
-        photo.save()
+    def post(self, request, *args, **kwargs):
+        # We'll handle multiple files manually here
+        self.event = get_object_or_404(Event, pk=self.kwargs['event_id'])
+        files = request.FILES.getlist('images')
+        error = None
 
+        if not files:
+            error = "You must select at least one image."
+        else:
+            for f in files:
+                form = PhotoUploadForm(request.POST, {'image': f})
+                if not form.is_valid():
+                    error = form.errors.get('image', ["Invalid file"])[0]
+                    break
+                # Create each photo
+                photo = Photo(
+                    event=self.event,
+                    user=request.user,
+                    image=f
+                )
+                photo.save()
+
+        if error:
+            context = self.get_context_data(form=PhotoUploadForm(), form_error=error)
+            return self.render_to_response(context)
         return redirect(self.request.path)
 
 

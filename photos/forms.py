@@ -8,8 +8,7 @@ class PhotoBaseForm(forms.ModelForm):
         exclude = ['user']
 
 
-class PhotoCreateForm(PhotoBaseForm):
-    ...
+
 
 
 class PhotoUploadForm(forms.ModelForm):

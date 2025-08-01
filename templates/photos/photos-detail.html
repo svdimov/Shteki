@@ -6,18 +6,17 @@
 
     <section class="u-section-photos">
         <div class="u-sheet u-valign-top">
-            <form method="post" enctype="multipart/form-data" class="upload-form"
-                  style="margin-bottom: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 10px;">
+            <form method="post" enctype="multipart/form-data" class="upload-form" style="margin-bottom: 40px;">
                 {% csrf_token %}
-                <label for="id_image" class="file-label">Choose image</label>
-                <input id="id_image" type="file" name="image" class="custom-file-input" style="display:none;">
+                <label for="id_image" class="file-label">Choose images</label>
+                <input id="id_image" type="file" name="images" class="custom-file-input" multiple style="display:none;">
                 <span id="file-name"></span>
                 {% if form.image.errors %}
                     <div class="form-error">
                         {{ form.image.errors }}
                     </div>
                 {% endif %}
-                <button type="submit" style="margin-top: 2px;">Submit</button>
+                <button type="submit">Submit</button>
             </form>
 
             {% if photos %}
@@ -85,6 +84,20 @@
                 fileNameSpan.textContent = '';
             }
         });
+
+        document.querySelector('.custom-file-input').addEventListener('change', function () {
+            const fileNameSpan = document.getElementById('file-name');
+            if (this.files.length > 0) {
+                let names = [];
+                for (let i = 0; i < this.files.length; i++) {
+                    names.push(this.files[i].name);
+                }
+                fileNameSpan.textContent = names.join(', ');
+            } else {
+                fileNameSpan.textContent = '';
+            }
+        });
+
     </script>
 
 {% endblock %}

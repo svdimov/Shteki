@@ -18,18 +18,15 @@ from events.forms import CreateEventForm, DetailsEventForm, EditEventForm
 from events.models import Event, EventPost, EventLike
 
 
-class NewEventView(LoginRequiredMixin, TemplateView): # TODO make it list view
+class NewEventView(LoginRequiredMixin, ListView):
+    model = Event
     template_name = 'events/new-events.html'
+    context_object_name = 'new_events'
+    paginate_by = 8
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get_queryset(self):
         today = timezone.localtime().date()
-
-        new_events = Event.objects.filter(start_date__gte=today).order_by('start_date')
-
-        context['new_events'] = new_events
-
-        return context
+        return Event.objects.filter(start_date__gte=today).order_by('start_date')
 
 
 class PastEventView(LoginRequiredMixin, ListView):
