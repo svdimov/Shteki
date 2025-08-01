@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/photos.css' %}" media="screen">
+
+<section class="u-border-1 u-border-palette-1-base u-clearfix u-image u-section-2" id="sec-0ed1">
+    <div class="u-clearfix u-sheet u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xs u-sheet-1">
+
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+            <h3 class="u-text u-text-default u-text-1">Event photos</h3>
+            <div style="display: flex; align-items: center;">
+                <input type="text" id="search-input" placeholder="Search past events..."
+                       style="padding: 6px 10px; border-radius: 4px; border: 1px solid #ccc; font-size: 0.9rem; margin-right: 6px;">
+                <button id="search-btn"
+                        style="padding: 6px 12px; background-color: #f9844a; color: #fff; border: none; border-radius: 4px; cursor: pointer;">
+                    Search
+                </button>
+            </div>
+        </div>
+
+        <!-- Events container -->
+        <div id="events-container"></div>
+
+        <!-- Pagination container styled as original -->
+        <div id="pagination-container" class="pagination"
+             style="display: flex; justify-content: center; margin-top: 20px; gap: 8px;"></div>
+    </div>
+</section>
+
+<script>
+    const apiUrl = "{% url 'api-past-events' %}";
+    const detailsUrlTemplate = "{% url 'event-details' 0 %}";
+    const morePhotosUrlTemplate = "{% url 'photos-detail' 0 %}";
+
+    let currentQuery = '';
+    let currentPage = 1;
+    let totalPages = 1;
+
+    document.getElementById('search-btn').addEventListener('click', () => {
+        currentQuery = document.getElementById('search-input').value.trim();
+        currentPage = 1;
+        loadEvents();
+    });
+    document.getElementById('search-input').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            currentQuery = document.getElementById('search-input').value.trim();
+            currentPage = 1;
+            loadEvents();
+        }
+    });
+
+    function loadEvents() {
+        let url = `${apiUrl}?page=${currentPage}`;
+        if (currentQuery) {
+            url += `&q=${encodeURIComponent(currentQuery)}`;
+        }
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                renderEvents(data.results);
+                renderPagination(data.count);
+            });
+    }
+
+    function renderEvents(events) {
+        const container = document.getElementById('events-container');
+        container.innerHTML = '';
+
+        if (events.length === 0) {
+            container.innerHTML = '<h3 class="center-text">No photos.</h3>';
+            return;
+        }
+
+        events.forEach(event => {
+            const img1 = event.image1 && event.image1 !== '' ? event.image1 : "{% static 'images/452545.jpg' %}";
+            const img2 = event.image2 && event.image2 !== '' ? event.image2 : "{% static 'images/photo-1519904981063-b0cf448d479e.jpeg' %}";
+            const img3 = event.image3 && event.image3 !== '' ? event.image3 : "{% static 'images/2133123.jpg' %}";
+            const detailUrl = detailsUrlTemplate.replace('/0/', '/' + event.id + '/');
+            const morePhotosUrl = morePhotosUrlTemplate.replace('/0/', '/' + event.id + '/');
+
+            container.innerHTML += `
+                <div class="u-align-left u-container-align-left u-container-style u-group u-palette-1-light-3 u-radius u-shape-round u-group-1"
+                     data-animation-name="customAnimationIn"
+                     data-animation-duration="1500"
+                     data-animation-delay="0">
+                    <div class="u-container-layout u-container-layout-2">
+
+                        <img src="${img1}" alt="${event.name}"
+                             class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-2"
+                             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+
+                        <img src="${img2}" alt="${event.name}"
+                             class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-3"
+                             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+
+                        <img src="${img3}" alt="${event.name}"
+                             class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-4"
+                             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+
+                        <h3 class="u-align-center u-text u-text-2">${event.name}</h3>
+                        <div class="u-align-center u-border-3 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+
+                        <div style="display:flex; gap:12px; justify-content:center;">
+
+                            <a href="${morePhotosUrl}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">
+                                More Photos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function renderPagination(totalItems) {
+        const container = document.getElementById('pagination-container');
+        container.innerHTML = '';
+
+        const perPage = 8;
+        totalPages = Math.ceil(totalItems / perPage);
+
+        if (totalPages <= 1) return;
+
+        if (currentPage > 1) {
+            container.innerHTML += `<a href="#" onclick="gotoPage(1); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">First</a>`;
+            container.innerHTML += `<a href="#" onclick="gotoPage(${currentPage - 1}); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">Previous</a>`;
+        }
+
+        container.innerHTML += `<span style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px;">
+            Page ${currentPage} of ${totalPages}
+        </span>`;
+
+        if (currentPage < totalPages) {
+            container.innerHTML += `<a href="#" onclick="gotoPage(${currentPage + 1}); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">Next</a>`;
+            container.innerHTML += `<a href="#" onclick="gotoPage(${totalPages}); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">Last</a>`;
+        }
+    }
+
+    function gotoPage(page) {
+        currentPage = page;
+        loadEvents();
+    }
+
+    window.onload = () => {
+        loadEvents();
+    };
+</script>
+
+{% endblock %}

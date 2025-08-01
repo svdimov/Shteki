@@ -8,6 +8,7 @@ urlpatterns = [
     path('', include('common.urls')),
     path('accounts/', include('accounts.urls')),
     path('events/', include('events.urls')),
+    path('photos/', include('photos.urls')),
 ]
 
 if settings.DEBUG:

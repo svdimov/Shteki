@@ -18,7 +18,7 @@ from events.forms import CreateEventForm, DetailsEventForm, EditEventForm
 from events.models import Event, EventPost, EventLike
 
 
-class NewEventView(LoginRequiredMixin, TemplateView):
+class NewEventView(LoginRequiredMixin, TemplateView): # TODO make it list view
     template_name = 'events/new-events.html'
 
     def get_context_data(self, **kwargs):

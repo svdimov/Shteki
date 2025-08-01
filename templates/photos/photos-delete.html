@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <link rel="stylesheet" href="{% static 'css/photos-delete.css' %}" media="screen">
+    <section>
+        <div class="delete-confirm-container">
+            <h2 class="delete-title">Delete Photo?</h2>
+            <p class="delete-message">
+                Are you sure you want to <strong>permanently delete</strong> this photo?
+            </p>
+            <div class="delete-photo-preview">
+                <img src="{{ object.image.url }}" alt="Photo to delete" class="delete-photo-img">
+                <div class="delete-photo-meta">
+                    Uploaded by <b>{{ object.user.profile.full_name }}</b><br>
+                    <span>{{ object.uploaded_at|date:"SHORT_DATE_FORMAT" }}</span>
+                </div>
+            </div>
+            <form method="post" class="delete-form">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn">Yes, Delete</button>
+                <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="cancel-btn">Cancel</a>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}
