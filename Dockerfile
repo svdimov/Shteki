@@ -1,11 +1,10 @@
 FROM python:3.12-slim
 
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Add this block BEFORE pip install if you use Pillow, psycopg2, or anything needing compilation!
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
