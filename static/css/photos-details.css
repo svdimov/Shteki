@@ -363,3 +363,48 @@ button[type="submit"]:focus {
     color: #fff;
     transform: translateY(-1px) scale(1.02);
 }
+.circle-photo {
+    width: 130px;        /* adjust size as needed */
+    height: 130px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 14px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 10px #bbb;
+    background: #fff;
+    transition: box-shadow 0.25s;
+}
+.circle-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* This makes the img round */
+    display: block;
+    transition: box-shadow 0.22s;
+    cursor: zoom-in;
+}
+.circle-photo img:hover {
+    box-shadow: 0 4px 24px #bbb;
+}
+.photo-modal img {
+    width: 900px;
+    height: 900px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 0 40px #222;
+    background: #fff;
+    transition: transform 0.2s;
+    animation: zoomIn 0.17s;
+    display: block;
+    margin: auto;
+}
+@media (max-width: 1000px) {
+    .photo-modal img {
+        width: 95vw;
+        height: 80vw;
+        max-width: 98vw;
+        max-height: 80vh;
+    }
+}
