@@ -5,8 +5,7 @@ from django.db.models.query_utils import Q
 from django.shortcuts import redirect, get_object_or_404
 
 from accounts.models import Profile
-from django.urls.base import reverse_lazy
-from django.views.generic.base import TemplateView, View
+
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
@@ -14,8 +13,13 @@ from django.utils import timezone
 
 from common.models import EventParticipation
 
-from events.forms import CreateEventForm, DetailsEventForm, EditEventForm
+from events.forms import CreateEventForm,  EditEventForm
 from events.models import Event, EventPost, EventLike
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 class NewEventView(LoginRequiredMixin, ListView):
@@ -82,10 +86,10 @@ class EventDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         event = self.object
 
-        # All participants who chose "Will go"
+
         participants = EventParticipation.objects.filter(event=event, status='Will go').select_related('user')
 
-        # Get related profiles (optional optimization)
+
         profiles = Profile.objects.filter(user__in=[p.user for p in participants])
 
         creator_profile = getattr(getattr(event, 'creator', None), 'profile', None)
@@ -136,12 +140,7 @@ class EditEventView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
         return event.creator == self.request.user
 
 
-from django.views.generic import DeleteView
-from django.urls import reverse_lazy
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .models import Event
 
 
 class DeleteEventView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView, ):

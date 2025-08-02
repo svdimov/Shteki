@@ -1,16 +1,17 @@
-from django.views.generic.edit import CreateView
+
 from django.views.generic.list import ListView
 
-from django.views.generic import FormView, DetailView
-from django.shortcuts import get_object_or_404, redirect
-from .forms import PhotoUploadForm
-from events.models import Event
+from django.views.generic import  DetailView
 
 from django.urls import reverse_lazy
 from django.views.generic import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
-from photos.models import Photo
 
+from django.views.generic.edit import FormView
+from django.shortcuts import get_object_or_404, redirect
+from .forms import PhotoUploadForm
+from events.models import Event
+from photos.models import Photo
 
 # Create your views here.
 
@@ -30,11 +31,7 @@ class PhotosView(LoginRequiredMixin, ListView):
 
 
 
-from django.views.generic.edit import FormView
-from django.shortcuts import get_object_or_404, redirect
-from .forms import PhotoUploadForm
-from events.models import Event
-from photos.models import Photo
+
 
 class PhotoAddView(LoginRequiredMixin, FormView):
     template_name = 'photos/photos-detail.html'

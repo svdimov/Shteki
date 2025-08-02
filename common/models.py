@@ -4,7 +4,7 @@ from django.db import models
 from django.db import models
 from django.conf import settings
 from events.models import Event
-from events.choices import StatusChoice  # 🔔 Import your existing choices
+from events.choices import StatusChoice
 
 class EventParticipation(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_participations')

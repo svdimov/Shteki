@@ -10,7 +10,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, DeleteView
 
 from accounts.forms import AppUserCreationForm, ProfileEditForm, CustomAuthenticationForm, CustomChangePasswordForm
 from accounts.models import Profile
-from datetime import timedelta
+
 from django.utils import timezone
 from django.contrib.auth.forms import PasswordResetForm
 from django.shortcuts import render
@@ -147,6 +147,3 @@ class CustomPasswordResetConfirmView(PasswordResetConfirmView):
         return response
 
 #
-#  path("password-change/done/", auth_views.PasswordChangeDoneView.as_view(
-#      template_name='profiles/change-password-done.html'
-#  ), name='password_change_done'),
