@@ -17,7 +17,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+COPY . .
+
+RUN mkdir -p /app/static /app/media
+RUN chmod -R 777 /app/static /app/media
+
+# DON'T RUN collectstatic here unless you have all settings/env/secret_key ready
+# RUN python manage.py collectstatic --noinput
+
 COPY entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
-CMD ["/app/entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
