@@ -17,8 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
-#RUN python manage.py collectstatic --noinput
-
-CMD ["gunicorn", "Shteki.wsgi:application", "--bind", "0.0.0.0:8000", "--workers=4"]
+CMD ["/app/entrypoint.sh"]
