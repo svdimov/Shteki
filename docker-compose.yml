@@ -13,7 +13,6 @@ services:
 
   web:
     build: .
-    image: svdimov/shteki-web:latest
     command: gunicorn Shteki.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
       - .:/app
@@ -23,20 +22,15 @@ services:
       - "8000"
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgres://postgres:sHADOW85%40%40%26%26@db:5432/shteki_db
-      - DJANGO_SUPERUSER_USERNAME=admin
-      - DJANGO_SUPERUSER_PASSWORD=adminpassword
-      - DJANGO_SUPERUSER_EMAIL=admin@example.com
-      - DEBUG=0
-      - TZ=Europe/Sofia
+    env_file:
+      - .env
 
   nginx:
     image: nginx:latest
     ports:
-      - "81:80"
+      - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/app/static
       - media_volume:/app/media
     depends_on:
