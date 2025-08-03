@@ -31,6 +31,17 @@ services:
       - DEBUG=0
       - TZ=Europe/Sofia
 
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - static_volume:/app/static
+      - media_volume:/app/media
+    depends_on:
+      - web
+
 volumes:
   pgdata:
   static_volume:
