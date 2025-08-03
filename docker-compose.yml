@@ -1,5 +1,5 @@
 services:
-  web:
+  db:
     build: .
     command: gunicorn Shteki.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
