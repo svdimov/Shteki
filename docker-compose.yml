@@ -1,5 +1,17 @@
+version: "3.9"
+
 services:
   db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: shteki_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sHADOW85@@&&
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
     build: .
     command: gunicorn Shteki.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
@@ -17,3 +29,8 @@ services:
       - DJANGO_SUPERUSER_EMAIL=admin@example.com
       - DEBUG=0
       - TZ=Europe/Sofia
+
+volumes:
+  pgdata:
+  static_volume:
+  media_volume:
