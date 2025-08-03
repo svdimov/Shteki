@@ -1,4 +1,16 @@
+version: "3.9"
+
 services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: shteki_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: sHADOW85@@&&
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
   web:
     build: .
     command: gunicorn Shteki.wsgi:application --bind 0.0.0.0:8000 --workers 4
@@ -8,14 +20,20 @@ services:
       - media_volume:/app/media
     expose:
       - "8000"
-    env_file:
-      - .env
+    depends_on:
+      - db
     environment:
-    - TZ=Europe/Sofia
+      - DATABASE_URL=postgres://postgres:sHADOW85@@&&@db:5432/shteki_db
+      - DJANGO_SUPERUSER_USERNAME=admin
+      - DJANGO_SUPERUSER_PASSWORD=adminpassword
+      - DJANGO_SUPERUSER_EMAIL=admin@example.com
+      - DEBUG=0
+      - TZ=Europe/Sofia
+
   nginx:
     image: nginx:latest
     ports:
-      - "81:80"
+      - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/app/static
@@ -24,5 +42,6 @@ services:
       - web
 
 volumes:
+  pgdata:
   static_volume:
   media_volume:
