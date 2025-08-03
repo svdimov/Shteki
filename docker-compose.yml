@@ -13,7 +13,7 @@ services:
 
   web:
     build: .
-    image: svdimov/shteki-web:latest
+    image: svdimov/shteki-web:latest  # Added for image tagging
     command: gunicorn Shteki.wsgi:application --bind 0.0.0.0:8000 --workers 4
     volumes:
       - .:/app
@@ -24,7 +24,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://postgres:sHADOW85@@&&@db:5432/shteki_db
+      - DATABASE_URL=postgres://postgres:sHADOW85%40%40%26%26@db:5432/shteki_db  # URL-encoded password
       - DJANGO_SUPERUSER_USERNAME=admin
       - DJANGO_SUPERUSER_PASSWORD=adminpassword
       - DJANGO_SUPERUSER_EMAIL=admin@example.com
