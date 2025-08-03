@@ -3,4 +3,4 @@ __pycache__/
 *.py[cod]
 
 # Local environment overrides
-.env.local
+.env
