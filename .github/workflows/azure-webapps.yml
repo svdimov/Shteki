@@ -35,19 +35,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Create .env file for decouple (optional but recommended)
-        run: |
-          echo "SECRET_KEY=${SECRET_KEY}" >> .env
-          echo "DB_NAME=${DB_NAME}" >> .env
-          echo "DB_USER=${DB_USER}" >> .env
-          echo "DB_PASSWORD=${DB_PASSWORD}" >> .env
-          echo "DB_HOST=${DB_HOST}" >> .env
-          echo "DB_PORT=${DB_PORT}" >> .env
-          echo "ALLOWED_HOSTS=${ALLOWED_HOSTS}" >> .env
-          echo "CSRF_TRUSTED_ORIGINS=${CSRF_TRUSTED_ORIGINS}" >> .env
-          echo "EMAIL_BACKEND=${EMAIL_BACKEND}" >> .env
-          echo "DEFAULT_CONTACT_EMAIL=${DEFAULT_CONTACT_EMAIL}" >> .env
-          echo "COMPANY_EMAIL=${COMPANY_EMAIL}" >> .env
+     
 
       - name: Run migrations (optional but typical for Django)
         run: python manage.py migrate
