@@ -71,7 +71,7 @@ class Profile(models.Model):
     )
 
     profile_picture = models.ImageField(
-        upload_to='profile_pics/',
+        upload_to='shteki',  #or cloudinaryFileField
         blank=True,
         null=True,
         validators=(FileSizeValidator(max_size_mb=5),)

@@ -1,4 +1,3 @@
-
 from decouple import config, Csv
 
 from pathlib import Path
@@ -44,6 +43,8 @@ INSTALLED_APPS = [
     'photos.apps.PhotosConfig',
     'events.apps.EventsConfig',
     'rest_framework',
+    'cloudinary',
+    'cloudinary_storage',
 
 ]
 
@@ -128,14 +129,20 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Europe/Sofia'
 USE_TZ = True
 
-
 USE_I18N = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -145,15 +152,12 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/app/media'
-
 
 
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -167,4 +171,3 @@ LOGIN_URL = 'login'
 EMAIL_BACKEND = config('EMAIL_BACKEND')
 DEFAULT_CONTACT_EMAIL = config('DEFAULT_CONTACT_EMAIL')
 COMPANY_EMAIL = (config('COMPANY_EMAIL'))
-

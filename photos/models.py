@@ -11,7 +11,7 @@ class Photo(models.Model):
     event = models.ForeignKey(Event, related_name='user_photos', on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(
-        upload_to='user_event_photos/',
+        upload_to='shteki',  #or cloudinaryFileField
         validators=[
             FileExtensionValidator(['jpg', 'jpeg', 'png', 'gif']),
             FileSizeValidator(max_size_mb=6),
