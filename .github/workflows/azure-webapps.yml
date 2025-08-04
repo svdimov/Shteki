@@ -3,11 +3,13 @@ name: Azure Web App Django CI
 on:
   push:
     branches:
-      - main   # or your deployment branch
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+
 
     steps:
       - name: Checkout code
@@ -29,5 +31,5 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: <your-app-name>   # e.g. izkriveni-shteki-gfd9c2dreugzg6aw
+          app-name: izkriveni-shteki-gfd9c2dreugzg6aw
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
