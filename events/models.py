@@ -33,7 +33,7 @@ class Event(models.Model):
     city = models.CharField(max_length=100)
 
     image1 = models.ImageField(
-        upload_to='shteki',  #or cloudinaryFileField
+        upload_to='event_images/',
         blank=True,
         null=True,
         validators=[
@@ -42,7 +42,7 @@ class Event(models.Model):
         ]
     )
     image2 = models.ImageField(
-        upload_to='shteki',
+        upload_to='event_images/',
         blank=True,
         null=True,
         validators=[
@@ -51,7 +51,7 @@ class Event(models.Model):
         ]
     )
     image3 = models.ImageField(
-        upload_to='shteki',
+        upload_to='event_images/',
         blank=True,
         null=True,
         validators=[
