@@ -47,6 +47,7 @@ class CustomLoginView(LoginView):
     template_name = 'profiles/login.html'
 
     max_attempts = 3
+    ock_minutes = 15
 
 
     def dispatch(self, request, *args, **kwargs):

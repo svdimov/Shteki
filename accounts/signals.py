@@ -18,8 +18,8 @@ def create_profile(sender: UserModel, instance: UserModel, created: bool, **kwar
 
         )
         send_mail(
-            subject='Welcome to Petstagram',
-            message='Thank you for registering with Petstagram! We are excited to have you on board.',
+            subject='Welcome to www.izkriveni-shteki.bg',
+            message='Thank you for registering in www.izkriveni-shteki.bg! We are excited to have you on board.',
             from_email=settings.COMPANY_EMAIL,  # Use default email settings
             recipient_list=[instance.email],
         )

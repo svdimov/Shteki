@@ -152,9 +152,9 @@
         }</style>
     </nav>
     {% if user.is_authenticated %}
-        <p class="u-align-center u-text u-text-color-var u-text-2">Wellcome : {{ user.email }}</p>
+        <p class="u-align-center u-text u-text-color-var u-text-2">Welcome : {{ user.email }}</p>
     {% else %}
-        <p class="u-align-center u-text u-text-color-var u-text-2">Wellcome : Anonymous</p>
+        <p class="u-align-center u-text u-text-color-var u-text-2">Welcome : Anonymous</p>
     {% endif %}
 </header>
 {% block content %}
