@@ -9,7 +9,7 @@ from events.choices import StatusChoice
 class EventParticipation(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='event_participations')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='user_participations')
-    status = models.CharField(max_length=20, choices=StatusChoice.choices)  # 🔔 Reuse StatusChoice
+    status = models.CharField(max_length=20, choices=StatusChoice.choices)
 
     created_at = models.DateTimeField(auto_now_add=True)
 

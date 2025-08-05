@@ -46,4 +46,6 @@ class AppUserAdmin(UserAdmin):
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    ...
+    list_display = ("user", "first_name", "last_name")
+    search_fields = ("user__email", "first_name", "last_name")
+
