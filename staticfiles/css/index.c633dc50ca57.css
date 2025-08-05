@@ -1,5 +1,5 @@
  .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url('../images/dolumiti2.jpg');
+  background-image: linear-gradient(0deg, rgba(51, 44, 41, 0.65), rgba(51, 44, 41, 0.65)), url("../images/dolumiti2.a08727148bbe.jpg");
   background-position: 50% 50%;
 }
 
@@ -128,7 +128,7 @@
     width: 340px;
   }
 } .u-section-2 {
-  background-image: url('../images/photo-1503754290079-c5c0e07fe2d6.jpeg'), linear-gradient(to bottom, rgba(128, 128, 128, 1), rgba(128, 128, 128, 1));
+  background-image: url("../images/photo-1503754290079-c5c0e07fe2d6.5674058c8d08.jpeg"), linear-gradient(to bottom, rgba(128, 128, 128, 1), rgba(128, 128, 128, 1));
   background-position: 50% 50%, 50% 50%;
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
@@ -141,7 +141,7 @@
 .u-section-2 .u-image-1 {
   width: 628px;
   height: 628px;
-  background-image: url("../images/IMG-14c06c204f34bf276284164bcd8c386b-V.jpg");
+  background-image: url("../images/IMG-14c06c204f34bf276284164bcd8c386b-V.26951a67c627.jpg");
   background-position: 50% 50%;
   --animation-custom_in-translate_x: 300px;
   --animation-custom_in-translate_y: 0px;
@@ -154,7 +154,7 @@
 .u-section-2 .u-image-2 {
   width: 276px;
   height: 276px;
-  background-image: url("../images/cover2.jpg");
+  background-image: url("../images/cover2.c2e0dcd4c515.jpg");
   background-position: 50% 50%;
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 0px;
@@ -167,7 +167,7 @@
 .u-section-2 .u-image-3 {
   width: 389px;
   height: 389px;
-  background-image: url("../images/IMG-4f206ffda44e65baf3c402fe69f0bb02-V.jpg");
+  background-image: url("../images/IMG-4f206ffda44e65baf3c402fe69f0bb02-V.f44cd1002041.jpg");
   background-position: 50% 50%;
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 0px;
