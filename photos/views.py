@@ -19,13 +19,11 @@ from photos.models import Photo
 class PhotosView(LoginRequiredMixin, ListView):
     model = Event
     template_name = 'photos/photos.html'
-    context_object_name = 'new_events'
+    context_object_name = 'events'
     paginate_by = 8
 
     def get_queryset(self):
-
-        return Event.objects.order_by('-start_date')
-
+        return Event.objects.all().order_by('-start_date')
 
 
 

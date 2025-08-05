@@ -3,13 +3,15 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from rest_framework.pagination import PageNumberPagination
 from django.utils import timezone
-from django.db.models import Q
-from events.serializers import EventSerializer
+
 from rest_framework import generics, permissions, status
 from .models import EventPost, EventLike, Event
 from .serializers import EventPostSerializer, EventLikeSerializer
 from django.shortcuts import get_object_or_404
-
+from rest_framework.generics import ListAPIView
+from django.db.models import Q
+from .models import Event
+from .serializers import EventSerializer
 
 
 class PastEventsAPIPagination(PageNumberPagination):
@@ -105,3 +107,17 @@ class DeleteEventPostView(APIView):
 
         post.delete()
         return Response({'message': 'Post deleted successfully'})
+
+
+class AllEventsAPIView(ListAPIView):
+    queryset = Event.objects.all().order_by('-start_date')
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        query = self.request.GET.get('q', '').strip()
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query) | Q(location__icontains=query)
+            )
+        return queryset
