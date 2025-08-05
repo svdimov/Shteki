@@ -154,7 +154,7 @@
 .u-section-2 .u-image-2 {
   width: 276px;
   height: 276px;
-  background-image: url("../images/dolumiti2.jpg");
+  background-image: url("../images/cover2.jpg");
   background-position: 50% 50%;
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 0px;
@@ -167,7 +167,7 @@
 .u-section-2 .u-image-3 {
   width: 389px;
   height: 389px;
-  background-image: url("../images/IMG-a62468a5f47aef3f96e19053c0962df3-V.jpg");
+  background-image: url("../images/IMG-4f206ffda44e65baf3c402fe69f0bb02-V.jpg");
   background-position: 50% 50%;
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 0px;
@@ -318,4 +318,34 @@
     height: 101px;
     margin-bottom: 187px;
   }
+}.hiking-slogan {
+    text-align: center;
+    font-size: 2.1rem;              /* Bigger text */
+    font-style: italic;
+    color: #F58D54;                 /* Your brand color */
+    margin-top: 48px;               /* More space from header */
+    margin-bottom: 24px;
+    letter-spacing: 1.5px;
+    font-family: 'Lato', 'Open Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+.hiking-slogan-wrapper {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    min-height: 150px !important;
+    margin-top: 60px !important;
+    margin-bottom: 32px !important;
+    width: 100% !important;
+}
+
+.hiking-slogan {
+    text-align: center !important;
+    font-size: 2.6rem !important;
+    font-style: italic !important;
+    color: #F58D54 !important;
+    font-weight: bold !important;
+    letter-spacing: 1.5px !important;
+    margin: 0 !important;
+    font-family: 'Lato', 'Open Sans', Arial, sans-serif !important;
 }
