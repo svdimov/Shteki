@@ -315,10 +315,10 @@ var _default = function _default(XRegExp) {
    *   Properties and Property Aliases.
    * @returns {Object} Reference to definition structure when the name matches a Unicode Property.
    *
-   * @note
+   * @notes
    * For more info on Unicode Properties, see also http://unicode.org/reports/tr18/#Categories.
    *
-   * @note
+   * @notes
    * This method is *not* part of the officially documented API and may change or be removed in
    * the future. It is meant for userland code that wishes to reuse the (large) internal Unicode
    * structures set up by XRegExp.

@@ -11,6 +11,6 @@ class EventAdmin(admin.ModelAdmin):
 class EventPostAdmin(admin.ModelAdmin):
    pass
 
-@admin.register(EventLike)
-class EventLikeAdmin(admin.ModelAdmin):
-    pass
+# @admin.register(EventLike)
+# class EventLikeAdmin(admin.ModelAdmin):
+#     pass
