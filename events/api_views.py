@@ -74,7 +74,7 @@ class EventLikeToggleView(generics.GenericAPIView):
 
 
 class EditEventPostView(APIView):
-    permission_classes = [permissions.IsAuthenticated,DjangoModelPermissions]
+    permission_classes = [permissions.IsAuthenticated] # correct
 
     def post(self, request, post_id):
         post = get_object_or_404(EventPost, id=post_id)
