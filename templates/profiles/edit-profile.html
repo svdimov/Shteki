@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
 
@@ -12,10 +12,10 @@
 
 
 
-      <button type="submit" class="btn-save">Save Changes</button>
+      <button type="submit" class="btn-save">{% trans 'Save Changes' %}</button>
     </form>
 
-    <a href="{% url 'profile-details' request.user.pk %}" class="btn-back">Back to Profile</a>
+    <a href="{% url 'profile-details' request.user.pk %}" class="btn-back">{% trans 'Back to Profile' %}</a>
   </div>
 </section>
 {% endblock %}

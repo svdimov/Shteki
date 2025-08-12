@@ -109,3 +109,31 @@
     margin-top: -193px;
   }
 }
+ /* Layout container */
+.profile-actions {
+  display: flex;
+  gap: 16px;              /* space between buttons */
+  align-items: center;
+  justify-content: center; /* or flex-start / flex-end as you need */
+  flex-wrap: wrap;         /* allows wrapping on small screens */
+  margin: 24px 0;
+}
+
+/* Base button look (keep your styles) */
+.u-section-1 .u-btn-1,
+.u-section-1 .u-btn-2,
+.u-section-1 .u-btn-3 {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 2px -2px 8px 0 rgba(128,128,128,1);
+  padding: 12px 24px;
+  margin: 0;                     /* <-- kill the fixed margins */
+  white-space: nowrap;           /* <-- keep text on one line */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;              /* optional: make them equal width */
+  text-align: center;
+
+}

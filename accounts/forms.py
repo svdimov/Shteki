@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, SetPasswordForm, \
     PasswordChangeForm
 from django import forms
-
+from django.utils.translation import gettext_lazy as _
 from accounts.models import Profile
 
 UserModel = get_user_model()
@@ -14,7 +14,7 @@ class AppUserCreationForm(UserCreationForm):
 
 
         labels = {
-            'email': 'Email',
+            'email': _('Email'),
             'password1': 'Password',
             'password2': 'Repeat Password'
         }
@@ -29,13 +29,13 @@ class AppUserCreationForm(UserCreationForm):
 
         # Задаваме placeholder-и директно тук:
         self.fields['email'].widget.attrs.update({
-            'placeholder': 'Enter your email'
+            'placeholder': _('Enter your email')
         })
         self.fields['password1'].widget.attrs.update({
-            'placeholder': 'Enter your password'
+            'placeholder': _('Enter your password')
         })
         self.fields['password2'].widget.attrs.update({
-            'placeholder': 'Repeat your password'
+            'placeholder': _('Repeat your password')
         })
 
 
@@ -65,6 +65,23 @@ class CustomAuthenticationForm(AuthenticationForm):
         'invalid_login': '"Please enter a correct %(username)s and password.'
 
     }
+    username = forms.EmailField(
+        label=_('Email'),  # translatable label
+        widget=forms.EmailInput(attrs={
+            'placeholder': _('Enter your email'),
+            'autocomplete': 'username'
+        })
+    )
+    password = forms.CharField(
+        label=_('Password'),
+        strip=False,  # keep spaces; same as AuthenticationForm default
+        widget=forms.PasswordInput(attrs={
+            'placeholder': _('Enter your password'),
+            'autocomplete': 'current-password',
+            'class': 'u-input u-input-rectangle u-white u-border-1 u-border-grey-30',
+        })
+    )
+
 
     def confirm_login_allowed(self, user):
         if getattr(user, 'is_locked', False) or getattr(user, 'failed_login_attempts', 0) >= 3:

@@ -184,6 +184,117 @@ msgstr "Върнете се на началната страница"
 
 
 
+msgid "Password"
+msgstr "Парола"
+
+msgid "Enter your email"
+msgstr "Въведете вашия имейл"
+
+msgid "Enter your password"
+msgstr "Въведете вашата парола"
+
+
+msgid "Register"
+msgstr "Регистрация"
+
+
+msgid "Forgot password?"
+msgstr "Забравена парола?"
+
+msgid "Your account is locked"
+msgstr "Вашият профил е заключен"
+
+
+
+msgid "Repeat your password"
+msgstr "Повторете паролата си"
+
+msgid "SIGN IN"
+msgstr "ВХОД"
+
+msgid "You have attempted to login too many times. A password reset link has been sent to your email."
+msgstr "Опитали сте се да влезете твърде много пъти с грешна парола. Линк за нулиране на паролата ще се изпрати на вашия имейл."
+
+
+msgid "Send link to email"
+msgstr "Изпрати линк на имейла"
+
+msgid "Change Password"
+msgstr "Промени паролата"
+
+msgid "Password changed successfully!"
+msgstr "Паролата е променена успешно!"
+
+
+
+msgid "Back to Profile"
+msgstr "Назад към профила"
+
+msgid "Are you sure you want to delete your account?"
+msgstr "Сигурни ли сте, че искате да изтриете профила си?"
+
+msgid "Save Changes"
+msgstr "Запази промените"
+
+msgid "change profile"
+msgstr "промяна на профила"
+
+msgid "delete profile"
+msgstr "изтриване на профила"
+
+
+msgid "change password"
+msgstr "промяна на паролата"
+
+
+msgid "Forgot Password"
+msgstr "Забравена парола"
+
+msgid "Enter your email to receive password reset instructions:"
+msgstr "Въведете вашия имейл, за да получите инструкции за нулиране на паролата:"
+
+msgid "Send reset email"
+msgstr "Изпрати имейл за нулиране"
+
+
+msgid "Password reset complete"
+msgstr "Паролата е нулирана"
+
+msgid "Your password has been set. You may now log in using your new password."
+msgstr "Вашата парола е зададена. Можете да влезете с новата си парола."
+
+
+msgid "Go to login"
+msgstr "Отиди на вход"
+
+msgid "Set new password"
+msgstr "Задайте нова парола"
+
+msgid "Reset password"
+msgstr "Нулиране на паролата"
+
+msgid "Email sent"
+msgstr "Имейла е изпратен"
+
+
+msgid "If an account exists with the email you entered, a password reset link has been sent."
+msgstr "Ако съществува профил с въведения от вас имейл, линк за нулиране на паролата е изпратен."
+
+msgid "Please check your inbox."
+msgstr "Моля, проверете вашата пощенска кутия."
+
+msgid "Hi"
+msgstr "Здравейте"
+
+msgid "You're receiving this email because you requested a password reset for your account at "
+msgstr "Получавате този имейл, защото сте поискали нулиране на паролата за вашия профил в "
+
+msgid "Please go to the following page and set a new password:"
+msgstr "Моля, отидете на следната страница и задайте нова парола:"
+
+msgid "This link will expire in 30 minutes."
+msgstr "Линкът ще изтече след 30 минути."
+
 
 
 

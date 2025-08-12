@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/delete-profile.css' %}" media="screen">
 
@@ -8,7 +8,7 @@
          data-image-height="868">
     <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-sheet-1">
 
-        <h4 class="u-text u-text-default u-text-1">Are you sure you want to delete your account?</h4>
+        <h4 class="u-text u-text-default u-text-1">{% trans 'Are you sure you want to delete your account?' %}</h4>
 
         <form method="post" action="">
             {% csrf_token %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/register.css' %}" media="screen">
 <section class="register-section">
@@ -9,7 +10,7 @@
                 {{ form }}
                 {% csrf_token %}
 
-                <button type="submit" class="register-btn">SIGN IN</button>
+                <button type="submit" class="register-btn">{% trans 'SIGN IN' %}</button>
             </form>
         </div>
     </div>
