@@ -296,5 +296,27 @@ msgid "This link will expire in 30 minutes."
 msgstr "Линкът ще изтече след 30 минути."
 
 
+msgid "Edit Event"
+msgstr "Промени Събитието"
+
+
+msgid "Delete Event"
+msgstr "Изтриване на Събитието"
+
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Will go"
+msgstr "Ще отида"
+
+msgid "Maybe"
+msgstr "Може би"
+
+
+msgid "Not going"
+msgstr "Няма да отида"
+
+
 
 

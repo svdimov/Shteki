@@ -213,7 +213,12 @@
             const csrfToken = '{{ csrf_token }}';
             const eventId = {{ event.id }};
 
-            fetch(`/api/events/${eventId}/status/`, {
+            const langPrefix = window.location.pathname.split('/')[1];
+            const apiUrl = langPrefix
+                ? `/${langPrefix}/api/events/${eventId}/status/`
+                : `/api/events/${eventId}/status/`;
+
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -235,7 +240,7 @@
                 });
         });
     </script>
-    <!-- Status Form -->
+    <!-- Post Form -->
     <script>
         document.getElementById('post-form').addEventListener('submit', function (e) {
             e.preventDefault();
