@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'cloudinary',
     'cloudinary_storage',
+    'rosetta',
 
 ]
 
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -124,12 +126,23 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',  # тук ще се пазят преводите
+]
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('bg', 'Български'),
+]
 
 TIME_ZONE = 'Europe/Sofia'
 USE_TZ = True
 
 USE_I18N = True
+
+ROSETTA_AUTO_COMPILE = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -142,7 +155,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': config('CLOUDINARY_API_KEY'),
     'API_SECRET': config('CLOUDINARY_API_SECRET'),
 }
-
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -157,8 +169,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
-
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
@@ -166,7 +176,6 @@ AUTH_USER_MODEL = 'accounts.AppUser'
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 LOGIN_URL = 'login'
-
 
 DEFAULT_CONTACT_EMAIL = config('DEFAULT_CONTACT_EMAIL')
 COMPANY_EMAIL = (config('COMPANY_EMAIL'))
@@ -178,5 +187,3 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=False, cast=bool)
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
-
-

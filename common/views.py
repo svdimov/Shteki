@@ -27,6 +27,9 @@ class AboutAs(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_profiles'] = Profile.objects.count()
+        context['administrator_count'] = Profile.objects.filter(user__groups__name='Administrators').distinct().count()
+        context['moderator_count'] = Profile.objects.filter(user__groups__name='Moderators').distinct().count()
+        context['collaborator_count'] = Profile.objects.filter(user__groups__name='Collaborators').distinct().count()
         return context
 
 

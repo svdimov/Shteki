@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 {% block content %}
 
     <link rel="stylesheet" href="{% static 'css/events.css' %}" media="screen">
@@ -12,13 +12,13 @@
             {% if perms.events.add_event %}
                 <a href="{% url 'create-event' %}"
                    class="u-btn u-button-style u-hover-palette-1-light-1 u-palette-1-base u-radius u-btn-1">
-                    CREATE NEW EVENT
+                    {% trans 'CREATE NEW EVENT' %}
                 </a>
             {% endif %}
 
 
             {% if new_events %}
-                <h3 class="u-text u-text-1">New Events</h3>
+                <h3 class="u-text u-text-1">{% trans 'New Events' %}</h3>
                 {% for event in new_events %}
                     <div class="u-align-left u-container-align-left u-container-style u-group u-palette-1-light-3 u-radius u-shape-round u-group-1"
                          data-animation-name="customAnimationIn"
@@ -57,8 +57,7 @@
                             <h3 class="u-align-center u-text u-text-2">{{ event.name }}</h3>
                             <div class="u-align-center u-border-3 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
                             <a href="{% url 'event-details' event.pk %}"
-                               class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">More
-                                info</a>
+                               class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">{% trans 'More info' %}</a>
                         </div>
                     </div>
                 {% endfor %}

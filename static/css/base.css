@@ -7,3 +7,11 @@
     opacity: 1 !important;
     transform: none !important;
 }
+.nav-button-right {
+    margin-left: auto; /* бута бутона вдясно */
+    display: inline-block;
+}
+
+.u-nav-1 {
+    display: flex; /* за да работи margin-left:auto */
+}

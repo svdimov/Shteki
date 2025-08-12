@@ -1,6 +1,8 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
-<html style="font-size: 16px;" lang="en">
+<html style="font-size: 16px;" lang="{{ LANGUAGE_CODE|default:'en' }}">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
@@ -85,62 +87,106 @@
             <ul class="u-nav u-spacing-30 u-unstyled u-nav-1" role="menubar">
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'home' %}" style="padding: 10px 0px;">Home</a>
+                                                      href="{% url 'home' %}"
+                                                      style="padding: 10px 0px;"> {% trans "Home" %}</a>
                 </li>
 
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'about' %}" style="padding: 10px 0px;">Members</a>
+                                                      href="{% url 'about' %}"
+                                                      style="padding: 10px 0px;">{% translate 'Members' %}</a>
                 </li>
 
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
                                                       href="{% url 'contacts' %}"
-                                                      style="padding: 10px 0px;">Contacts</a>
+                                                      style="padding: 10px 0px;">{% trans 'Contacts' %} </a>
                 </li>
 
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'new-events' %}" style="padding: 10px 0px;">New
-                    Events</a>
+                                                      href="{% url 'new-events' %}"
+                                                      style="padding: 10px 0px;">{% trans 'New Events' %} </a>
                 </li>
 
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'past-events' %}" style="padding: 10px 0px;">Past
-                    Events</a>
+                                                      href="{% url 'past-events' %}"
+                                                      style="padding: 10px 0px;">{% trans 'Past Events' %} </a>
                 </li>
 
 
                 <li role="none" class="u-nav-item"><a role="menuitem"
                                                       class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'photos' %}" style="padding: 10px 0px;">Photos</a>
+                                                      href="{% url 'photos' %}"
+                                                      style="padding: 10px 0px;">{% trans 'Photos' %} </a>
                 </li>
 
                 {% if not  user.is_authenticated %}
                     <li role="none" class="u-nav-item"><a role="menuitem"
                                                           class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
                                                           href="{% url 'login' %}" target="_blank"
-                                                          style="padding: 10px 0px;">Login</a>
+                                                          style="padding: 10px 0px;">{% trans 'Login' %} </a>
                     </li>
                 {% else %}
                     <li role="none" class="u-nav-item"><a role="menuitem"
                                                           class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
                                                           href="{% url 'profile-details' request.user.pk %}"
-                                                          style="padding: 10px 0px;">Account</a>
+                                                          style="padding: 10px 0px;">{% trans 'Account' %} </a>
                     </li>
                     <li role="none" class="u-nav-item">
                         <form method="post" action="{% url 'logout' %}" style="display:inline;">
                             {% csrf_token %}
                             <button type="submit"
-                                    class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
+                                    class="u-border-2 u-border-active-palette-1-base
+               u-border-hover-palette-1-base
+               u-border-no-left u-border-no-right
+               u-border-no-top u-border-white
+               u-button-style u-nav-link
+               u-text-active-palette-1-base
+               u-text-hover-palette-1-base
+               nav-button-right"
                                     style="background:none; border:none; padding:10px 0px; cursor:pointer; font:inherit; color:inherit; text-transform:inherit; letter-spacing:inherit;">
-                                Logout
+                                {% trans 'Logout' %}
                             </button>
+
                         </form>
                     </li>
 
                 {% endif %}
+                {% get_current_language as LANGUAGE_CODE %}
+
+                {% if LANGUAGE_CODE == "bg" %}
+                    <!-- Show EN button -->
+                    <li role="none" class="u-nav-item">
+                        <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit" name="language" value="en"
+                                    style="background:none; border:1px solid #fff; border-radius:4px;
+                       font-size:14px; padding:4px 8px; margin-left:6px;
+                       cursor:pointer; color:#fff; font-weight:bold;">
+                                EN
+                            </button>
+                        </form>
+                    </li>
+                {% else %}
+                    <!-- Show BG button -->
+                    <li role="none" class="u-nav-item">
+                        <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                            <button type="submit" name="language" value="bg"
+                                    style="background:none; border:1px solid #fff; border-radius:4px;
+                       font-size:14px; padding:4px 8px; margin-left:6px;
+                       cursor:pointer; color:#fff; font-weight:bold;">
+                                BG
+                            </button>
+                        </form>
+                    </li>
+                {% endif %}
+
+
             </ul>
         </div>
 
@@ -155,9 +201,9 @@
         }</style>
     </nav>
     {% if user.is_authenticated %}
-        <p class="u-align-center u-text u-text-color-var u-text-2">Welcome : {{ user.email }}</p>
+        <p class="u-align-center u-text u-text-color-var u-text-2">{% trans 'Welcome' %} : {{ user.email }}</p>
     {% else %}
-        <p class="u-align-center u-text u-text-color-var u-text-2">Welcome : Anonymous</p>
+        <p class="u-align-center u-text u-text-color-var u-text-2">{% trans 'Welcome' %} : Anonymous</p>
     {% endif %}
 </header>
 {% block content %}

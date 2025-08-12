@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 
@@ -8,7 +9,7 @@
         <div class="u-sheet u-valign-top">
             <form method="post" enctype="multipart/form-data" class="upload-form" style="margin-bottom: 40px;">
                 {% csrf_token %}
-                <label for="id_image" class="file-label">Choose images</label>
+                <label for="id_image" class="file-label">{% trans 'Choose images' %}</label>
                 <input id="id_image" type="file" name="images" class="custom-file-input" multiple style="display:none;">
                 <span id="file-name"></span>
                 {% if form_error %}
@@ -16,11 +17,11 @@
                         {{ form_error }}
                     </div>
                 {% endif %}
-                <button type="submit">Submit</button>
+                <button type="submit">{% trans 'Submit' %}</button>
             </form>
 
             {% if photos %}
-                <h2 class="u-text u-text-default">All photos from {{ event.name }}</h2>
+                <h2 class="u-text u-text-default">{% trans 'All photos from ' %}{{ event.name }}</h2>
                 <div class="user-photo-gallery">
                     {% for photo in photos %}
                         <div class="photo-card photo-fade-in">
@@ -29,12 +30,12 @@
                             </div>
                             {% if photo.user == request.user or perms.photos.delete_photo %}
                                 <a href="{% url 'photo-delete' photo.id %}?next={{ request.path }}"
-                                   class="delete-btn-bottom" title="Delete this photo">Delete</a>
+                                   class="delete-btn-bottom" title="Delete this photo">{% trans 'Delete' %}</a>
                             {% endif %}
 
 
                             <div class="u-photo-meta">
-                                Uploaded by <b>{{ photo.user.profile.full_name }}</b><br>
+                                {% trans 'Uploaded by' %} <b>{{ photo.user.profile.full_name }}</b><br>
                                 <span>{{ photo.uploaded_at|date:"SHORT_DATE_FORMAT" }}</span>
                             </div>
                         </div>
@@ -42,7 +43,7 @@
                 </div>
                 </div>
             {% else %}
-                <h2 class="u-text u-text-default">No user photos uploaded yet.</h2>
+                <h2 class="u-text u-text-default">{% trans 'No user photos uploaded yet.' %}</h2>
             {% endif %}
 
         </div>

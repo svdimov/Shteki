@@ -349,3 +349,29 @@
     margin: 0 !important;
     font-family: 'Lato', 'Open Sans', Arial, sans-serif !important;
 }
+
+
+/* Center list in the middle of section */
+.u-section-1 .u-list-1 {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* centers vertically if section has height */
+    height: 100%;
+    background: none; /* no background */
+}
+
+/* Keep repeater items in a row */
+.u-section-1 .u-repeater-1 {
+    display: flex;
+    gap: 22px; /* space between buttons */
+}
+
+/* Transparent background for each event item */
+.u-section-1 .u-list-item-1,
+.u-section-1 .u-list-item-2 {
+    background-color: transparent !important; /* remove grey */
+    border: 2px solid #F58D54; /* optional, to match brand */
+    margin: 0;
+    box-shadow: none !important; /* remove shadow if any */
+}
