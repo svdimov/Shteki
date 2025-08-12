@@ -317,6 +317,34 @@ msgstr "Може би"
 msgid "Not going"
 msgstr "Няма да отида"
 
+msgid "Save"
+msgstr "Запази"
 
 
+msgid "Creator"
+msgstr "Създал"
+
+msgid "No participants yet."
+msgstr "Все още няма участници."
+
+msgid "Location:"
+msgstr "Местоположение:"
+
+msgid "No Location for:"
+msgstr "Няма местоположение за:"
+
+msgid "Edit"
+msgstr "Промени"
+
+msgid "No available comments."
+msgstr "Няма налични коментари."
+
+msgid "Add comment..."
+msgstr "Добави коментар..."
+
+msgid "Add comment"
+msgstr "Добави коментар"
+
+msgid "people will go:"
+msgstr "Ще присъстват:"
 
