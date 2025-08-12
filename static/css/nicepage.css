@@ -45997,7 +45997,7 @@ a.u-link.u-text-hover-color-var:hover {
   --text-color-var: #09298e;
   margin: 111px calc(((100% - 1140px) / 2)  + -31px) 36px calc(((100% - 1140px) / 2)  + 874px);
 }
-@media (max-width: 1199px) {
+@media (max-width: 0px) {
   .u-header .u-text-1 {
     margin-right: calc(((100% - 940px) / 2));
     margin-left: calc(((100% - 940px) / 2));
@@ -46101,7 +46101,7 @@ a.u-link.u-text-hover-color-var:hover {
 .u-footer .u-icon-3 {
   color: rgb(0, 122, 185) !important;
 }
-@media (max-width: 1199px) {
+@media (max-width: 0px) {
   .u-footer .u-logo-image-1 {
     max-width: 80px;
     max-height: 80px;

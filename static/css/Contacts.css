@@ -130,7 +130,7 @@
   height: 100%;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 0px) {
   .u-section-1 .u-sheet-1 {
     min-height: 737px;
   }
@@ -343,7 +343,7 @@
   padding: 20px 0 21px;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 0px) {
   .u-section-2 .u-btn-1 {
     border-style: solid;
     --animation-custom_in-opacity: 0;

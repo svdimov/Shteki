@@ -105,7 +105,7 @@
 /* Центриране на fallback текстове */
 
 /* Responsive корекции */
-@media (max-width: 1199px) {
+@media (max-width: 0px) {
   .u-section-1, .u-section-2 {
     min-height: 1223px;
   }

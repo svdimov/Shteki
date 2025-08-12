@@ -432,7 +432,7 @@
     margin: 0 auto;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 0px) {
     .u-section-1 .u-sheet-1 {
         min-height: 2138px;
     }
