@@ -14,7 +14,7 @@ class Photo(models.Model):
         upload_to='user_event_photos/',
         validators=[
             FileExtensionValidator(['jpg', 'jpeg', 'png', 'gif']),
-            FileSizeValidator(max_size_mb=6),
+            FileSizeValidator(max_size_mb=9),
         ]
     )
     uploaded_at = models.DateTimeField(auto_now_add=True)

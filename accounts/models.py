@@ -70,7 +70,7 @@ class Profile(models.Model):
         upload_to='profile_pics/',
         blank=True,
         null=True,
-        validators=(FileSizeValidator(max_size_mb=5),)
+        validators=(FileSizeValidator(max_size_mb=9),)
     )
 
     gender = models.CharField(max_length=15, choices=GenderChoice)
