@@ -2,7 +2,7 @@ from profile import Profile
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.db.models.query_utils import Q
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 
 from accounts.models import Profile
 

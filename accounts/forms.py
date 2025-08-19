@@ -8,7 +8,6 @@ from accounts.models import Profile
 
 UserModel = get_user_model()
 
-
 class AppUserCreationForm(UserCreationForm):
     class Meta:
         model = UserModel
