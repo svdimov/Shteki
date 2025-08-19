@@ -25,6 +25,7 @@ def create_profile(sender: UserModel, instance: UserModel, created: bool, **kwar
             recipient_list=[instance.email],
         )
 
+
 @receiver(user_login_failed)
 def handle_failed_admin_login(sender, credentials, request, **kwargs):
     if request is None or not request.path.startswith('/admin'):

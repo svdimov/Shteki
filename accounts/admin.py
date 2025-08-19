@@ -9,6 +9,8 @@ UserModel = get_user_model()
 
 admin.site.login_form = CustomAdminAuthenticationForm
 
+
+
 @admin.register(UserModel)
 class AppUserAdmin(UserAdmin):
     list_display = ("email", "is_active", "is_staff")
