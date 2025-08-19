@@ -74,7 +74,7 @@ class ProfileBaseForm(forms.ModelForm):
 
 class CustomAuthenticationForm(AuthenticationForm):
     error_messages = {
-        'invalid_login': '"Please enter a correct %(username)s and password.'
+        'invalid_login': _('Please enter a correct %(username)s and password.'),
 
     }
     username = forms.EmailField(
@@ -133,3 +133,5 @@ class CustomChangePasswordForm(PasswordChangeForm):
 
         self.fields['new_password1'].help_text = ''
         self.fields['new_password2'].help_text = ''
+
+

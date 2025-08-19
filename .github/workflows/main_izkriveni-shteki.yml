@@ -41,6 +41,8 @@ jobs:
           path: |
             .
             !venv/
+            !staticfiles/**
+            !.git/**
   deploy:
     runs-on: ubuntu-latest
     needs: build
