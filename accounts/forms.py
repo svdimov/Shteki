@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, SetPasswordForm, \
     PasswordChangeForm
 from django import forms
+from django.contrib.admin.forms import AdminAuthenticationForm
 from django.utils.translation import gettext_lazy as _
 from accounts.models import Profile
 
@@ -52,6 +53,17 @@ class CustomSetPasswordForm(SetPasswordForm):
         super().__init__(*args, **kwargs)
         self.fields['new_password1'].help_text = ''
         self.fields['new_password2'].help_text = ''
+
+
+class CustomAdminAuthenticationForm(AdminAuthenticationForm):
+    def confirm_login_allowed(self, user):
+        if getattr(user, "is_locked", False) or getattr(user, "failed_login_attempts", 0) >= 3:
+            raise forms.ValidationError(
+                "Your account is locked due to too many failed login attempts.",
+                code="locked",
+            )
+        super().confirm_login_allowed(user)
+
 
 
 

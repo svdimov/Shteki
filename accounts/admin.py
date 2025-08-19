@@ -1,11 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-from accounts.forms import AppUserCreationForm, AppUserChangeForm
+from accounts.forms import AppUserCreationForm, AppUserChangeForm, CustomAdminAuthenticationForm
 from accounts.models import Profile
 
 UserModel = get_user_model()
 
+
+admin.site.login_form = CustomAdminAuthenticationForm
 
 @admin.register(UserModel)
 class AppUserAdmin(UserAdmin):
