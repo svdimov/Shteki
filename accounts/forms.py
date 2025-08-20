@@ -56,13 +56,34 @@ class CustomSetPasswordForm(SetPasswordForm):
 
 
 class CustomAdminAuthenticationForm(AdminAuthenticationForm):
+    error_messages = {
+        **AdminAuthenticationForm.error_messages,
+        "locked": _("Your account is locked due to too many failed login attempts."),
+    }
+
+    def clean(self):
+        # Check lock status before authenticating (username is your email)
+        username = self.data.get("username")
+        if username:
+            User = get_user_model()
+            try:
+                user = User.objects.get(email=username)
+            except User.DoesNotExist:
+                user = None
+            if user and (getattr(user, "is_locked", False) or getattr(user, "failed_login_attempts", 0) >= 3):
+                raise forms.ValidationError(self.error_messages["locked"], code="locked")
+        # Fall back to normal auth flow
+        return super().clean()
+
     def confirm_login_allowed(self, user):
+        # Double guard for the case of correct password on a locked account
         if getattr(user, "is_locked", False) or getattr(user, "failed_login_attempts", 0) >= 3:
-            raise forms.ValidationError(
-                "Your account is locked due to too many failed login attempts.",
-                code="locked",
-            )
-        super().confirm_login_allowed(user)
+            raise forms.ValidationError(self.error_messages["locked"], code="locked")
+        return super().confirm_login_allowed(user)
+
+
+
+
 
 
 
@@ -109,7 +130,7 @@ class ProfileEditForm(ProfileBaseForm):
         exclude = ['user']
 
         widgets = {
-            # 'profile_picture': forms.URLInput(attrs={'placeholder': 'Enter a URL'}),
+
             'profile_picture': forms.FileInput(attrs={'accept': 'image/*'}),
             'date_of_birth': forms.DateInput(attrs={'type': 'date'}),
         }
