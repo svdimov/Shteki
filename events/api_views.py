@@ -5,7 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from django.utils import timezone
 
 from rest_framework import generics, permissions, status
-from .models import EventPost, EventLike, Event
+from .models import EventPost, EventLike, Event, PostLike
 from .serializers import EventPostSerializer, EventLikeSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.generics import ListAPIView
@@ -70,6 +70,20 @@ class EventLikeToggleView(generics.GenericAPIView):
         else:
             liked = True
         count = EventLike.objects.filter(event=event).count()
+        return Response({'liked': liked, 'likes_count': count})
+
+
+class PostLikeToggleView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    def post(self, request, post_id):
+        post = get_object_or_404(EventPost, pk=post_id)
+        like, created = PostLike.objects.get_or_create(post=post, user=request.user)
+        if not created:
+            like.delete()
+            liked = False
+        else:
+            liked = True
+        count = post.likes.count()
         return Response({'liked': liked, 'likes_count': count})
 
 

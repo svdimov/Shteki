@@ -854,3 +854,12 @@
     cursor: pointer;
     font-size: 0.9rem;
 }
+.like-heart {
+  color: white;       /* default white */
+  font-size: 22px;    /* optional: make hearts larger */
+  transition: color 0.2s ease;
+}
+
+.like-heart.liked {
+  color: red;         /* red when liked */
+}

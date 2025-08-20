@@ -14,7 +14,7 @@ from django.utils import timezone
 from common.models import EventParticipation
 
 from events.forms import CreateEventForm,  EditEventForm
-from events.models import Event, EventPost, EventLike
+from events.models import Event, EventPost, EventLike, PostLike
 from django.views.generic import DeleteView
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
@@ -98,6 +98,9 @@ class EventDetailView(LoginRequiredMixin, DetailView):
         likes_count = EventLike.objects.filter(event=event).count()
         liked_by_me = EventLike.objects.filter(event=event, user=self.request.user).exists()
 
+        for post in posts:
+            post.liked_by_me = PostLike.objects.filter(post=post, user=self.request.user).exists()
+
         context.update({
             'participants': profiles,
             'will_go_count': participants.count(),
@@ -106,6 +109,9 @@ class EventDetailView(LoginRequiredMixin, DetailView):
             'likes_count': likes_count,
             'liked_by_me': liked_by_me,
         })
+
+
+
 
         return context
 
@@ -124,7 +130,7 @@ class EventDetailView(LoginRequiredMixin, DetailView):
 class EditEventView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Event
     form_class = EditEventForm
-    template_name = 'events/edit-event.html'
+    template_name = 'events/change-event.html'
     context_object_name = 'event'
     permission_required = 'events.change_event'
 

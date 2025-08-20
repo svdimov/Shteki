@@ -133,6 +133,15 @@
                                 <h5 class="u-text u-text-default u-text-6">
                                     <span id="post-content-{{ post.id }}">{{ post.text }}</span>
                                 </h5>
+                                <span id="like-heart-{{ post.id }}"
+                                      class="like-heart{% if post.liked_by_me %} liked{% endif %}"
+                                      data-post-id="{{ post.id }}"
+                                      style="cursor:pointer;">&#10084;</span>
+
+                                <span id="likes-count-{{ post.id }}">{{ post.likes.count|default:0 }}</span>
+                                <span id="likes-label-{{ post.id }}">{{ post.likes.count|pluralize:" like, likes" }}</span>
+
+                                <br>
                                 <small>{{ post.created_at|date:"d M Y H:i" }}</small>
 
 
@@ -163,29 +172,72 @@
                     <span id="like-heart" class="u-icon u-icon-1{% if liked_by_me %} liked{% endif %}"
                           style="cursor:pointer;">
 <script>
-  document.getElementById('like-heart').addEventListener('click', function () {
-      fetch("{% url 'event-like' event.id %}", {
-          method: 'POST',
-          headers: {
-              'X-CSRFToken': '{{ csrf_token }}',
-              'Content-Type': 'application/json'
-          },
-      })
-          .then(response => response.json())
-          .then(data => {
-              document.getElementById('likes-count').textContent = data.likes_count;
-              const heart = document.getElementById('like-heart');
-              if (data.liked) {
-                  heart.classList.add('liked');
-              } else {
-                  heart.classList.remove('liked');
-              }
-          })
-          .catch(error => {
-              console.error('Error:', error);
-          });
-  });
+(function () {
+    const csrfToken = '{{ csrf_token }}';
+
+    // --- Event like (existing) ---
+    const eventHeart = document.getElementById('like-heart');
+    if (eventHeart) {
+        eventHeart.addEventListener('click', function () {
+            fetch("{% url 'event-like' event.id %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json'
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const countEl = document.getElementById('likes-count');
+                    if (countEl) countEl.textContent = data.likes_count;
+                    eventHeart.classList.toggle('liked', !!data.liked);
+                })
+                .catch(error => {
+                    console.error('Event like error:', error);
+                });
+        });
+    }
+
+    // --- Post likes (new) ---
+    // Expect hearts like: <span id="like-heart-{{ post.id }}" class="like-heart" data-post-id="{{ post.id }}">...</span>
+    document.querySelectorAll('.like-heart').forEach(heart => {
+        heart.addEventListener('click', function () {
+            const postId = this.dataset.postId || (this.id ? this.id.split('-').pop() : null);
+            if (!postId) return;
+
+            const lang = document.documentElement.lang || '';
+            const url = `/${lang}/events/api/posts/${postId}/like/`;
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    this.classList.toggle('liked', !!data.liked);
+
+                    const counterEl = document.getElementById(`likes-count-${postId}`);
+                    const labelEl = document.getElementById(`likes-label-${postId}`);
+
+                    if (counterEl != null && typeof data.likes_count !== 'undefined') {
+                        counterEl.textContent = data.likes_count;
+                        if (labelEl) {
+                            labelEl.textContent = data.likes_count === 1 ? ' like' : ' likes';
+                        }
+                    }
+                })
+
+                .catch(err => {
+                    console.error('Post like error:', err);
+                });
+        });
+    });
+})();
 </script>
+
 
   <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 50 50">
     <use xlink:href="#svg-6915"></use>
@@ -257,7 +309,7 @@
             const eventId = {{ event.id }};
             const lang = document.documentElement.lang;
 
-             fetch(`/${lang}/events/${eventId}/posts/`, {
+            fetch(`/${lang}/events/${eventId}/posts/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -304,9 +356,7 @@
     </script>
 
     <script>
-         const lang = document.documentElement.lang;
-
-
+        const lang = document.documentElement.lang;
 
 
         function showEditForm(postId) {
