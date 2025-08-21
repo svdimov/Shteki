@@ -181,25 +181,19 @@
         eventHeart.addEventListener('click', function () {
             fetch("{% url 'event-like' event.id %}", {
                 method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
-                },
+                headers: {'X-CSRFToken': csrfToken, 'Content-Type': 'application/json'},
             })
-                .then(response => response.json())
+                .then(r => r.json())
                 .then(data => {
                     const countEl = document.getElementById('likes-count');
                     if (countEl) countEl.textContent = data.likes_count;
                     eventHeart.classList.toggle('liked', !!data.liked);
                 })
-                .catch(error => {
-                    console.error('Event like error:', error);
-                });
+                .catch(err => console.error('Event like error:', err));
         });
     }
 
     // --- Post likes (new) ---
-    // Expect hearts like: <span id="like-heart-{{ post.id }}" class="like-heart" data-post-id="{{ post.id }}">...</span>
     document.querySelectorAll('.like-heart').forEach(heart => {
         heart.addEventListener('click', function () {
             const postId = this.dataset.postId || (this.id ? this.id.split('-').pop() : null);
@@ -210,18 +204,16 @@
 
             fetch(url, {
                 method: 'POST',
-                headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
-                }
+                headers: {'X-CSRFToken': csrfToken, 'Content-Type': 'application/json'}
             })
                 .then(res => res.json())
                 .then(data => {
+                    // toggle red/white heart
                     this.classList.toggle('liked', !!data.liked);
 
+                    // update number + label
                     const counterEl = document.getElementById(`likes-count-${postId}`);
                     const labelEl = document.getElementById(`likes-label-${postId}`);
-
                     if (counterEl != null && typeof data.likes_count !== 'undefined') {
                         counterEl.textContent = data.likes_count;
                         if (labelEl) {
@@ -229,10 +221,7 @@
                         }
                     }
                 })
-
-                .catch(err => {
-                    console.error('Post like error:', err);
-                });
+                .catch(err => console.error('Post like error:', err));
         });
     });
 })();
