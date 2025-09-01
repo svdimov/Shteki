@@ -50,6 +50,7 @@ def handle_failed_admin_login(sender, credentials, request, **kwargs):
         pass
 
 
+
 @receiver(user_logged_in)
 def reset_failed_attempts(sender, user, request, **kwargs):
     if getattr(user, 'failed_login_attempts', 0):

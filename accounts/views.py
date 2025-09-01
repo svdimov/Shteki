@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.contrib.auth.views import LogoutView, LoginView, PasswordResetConfirmView
+from django.contrib.auth.views import  LoginView, PasswordResetConfirmView
 
 from django.shortcuts import get_object_or_404
 
