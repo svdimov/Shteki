@@ -16,6 +16,7 @@
                     <form method="post" enctype="multipart/form-data" action="{% url 'create-event' %}">
 
                         {% csrf_token %}
+
                         {{ form }}
                         <div class="u-align-center u-form-group u-form-submit">
                             <a href="#" class="u-btn u-btn-submit u-button-style">Create Event </a>
