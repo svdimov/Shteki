@@ -135,17 +135,28 @@ class EditEventView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     permission_required = 'events.change_event'
 
     def get_object(self, queryset=None):
-        event_id = self.kwargs['event_id']
-        return get_object_or_404(Event, id=event_id)
+        return get_object_or_404(Event, id=self.kwargs['event_id'])
 
     def get_success_url(self):
         return reverse_lazy('event-details', kwargs={'event_id': self.object.id})
 
     def test_func(self):
-        event = self.get_object()
-        return event.creator == self.request.user
+        return self.get_object().creator == self.request.user
 
+    def form_valid(self, form):
+        original = self.get_object()   # ⬅️ КЛЮЧОВИЯ РЕД
+        event = form.instance
 
+        if 'image1' not in self.request.FILES:
+            event.image1 = original.image1
+
+        if 'image2' not in self.request.FILES:
+            event.image2 = original.image2
+
+        if 'image3' not in self.request.FILES:
+            event.image3 = original.image3
+
+        return super().form_valid(form)
 
 
 

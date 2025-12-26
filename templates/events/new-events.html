@@ -3,8 +3,8 @@
 {% load i18n %}
 {% block content %}
 
-    <meta name="viewport" content="width=1024">
-    <link rel="stylesheet" href="{% static 'css/events.css' %}" media="screen">
+
+    <link rel="stylesheet" href="{% static 'css/new-events.css' %}" media="screen">
 
     <section
             class="u-clearfix u-grey-80 u-valign-bottom-lg u-valign-bottom-md u-valign-bottom-sm u-valign-bottom-xs u-section-1"
@@ -39,7 +39,7 @@
 
                             <img src="
 
-                                    {% if event.image2 %}{{ event.image2.url }}{% else %}{% static 'images/photo-1519904981063-b0cf448d479e.jpeg' %}{% endif %}"
+                                    {% if event.image2 %}{{ event.image2.url }}{% else %}{% static 'images/37.jpg' %}{% endif %}"
                                  alt="{{ event.name }}"
                                  class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-3"
                                  data-animation-name="customAnimationIn"

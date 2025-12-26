@@ -5,7 +5,7 @@ from accounts.models import Profile
 from django.views.generic import FormView
 from django.core.mail import send_mail
 from django.conf import settings
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from common.forms import ContactForm
 
 
@@ -15,7 +15,7 @@ class HomePageView(TemplateView):
     template_name = 'index.html'
 
 
-class AboutAs(ListView):
+class AboutAs(LoginRequiredMixin,ListView):
     model = Profile
     template_name = 'members.html'
     context_object_name = 'profiles'

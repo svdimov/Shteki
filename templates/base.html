@@ -1,267 +1,184 @@
 {% load static %}
 {% load i18n %}
 
-<!DOCTYPE html>
-<html style="font-size: 16px;" lang="{{ LANGUAGE_CODE|default:'en' }}">
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE|default:'en' }}">
 <head>
-    <meta name="viewport" content="width=1200">
-    <meta charset="utf-8">
-    <meta name="keywords"
-          content="​Wonderful tours, ​Backpacking Trips, ​Small group travel that&amp;apos;s good all over, ​Enjoy the perfect blend of adventure tours, ​Your adventure starts here, Tours Nature &amp;amp; Wildlife, Get in touch">
-    <meta name="description" content="">
-    <title>Home</title>
-    <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}" media="screen">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Изкривени щеки{% endblock %}</title>
 
+  <link rel="icon" href="{% static 'images/logo.png' %}" />
 
-    <script class="u-script" type="text/javascript" src="{% static 'js/jquery.js' %}" defer=""></script>
-    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
-    <meta name="generator" content="Nicepage 7.10.10, nicepage.com">
+  <!-- Outdoor-friendly fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-
-    <link id="u-theme-google-font" rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    <link id="u-header-footer-google-font" rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Ruslan+Display:400">
-    <script type="application/ld+json">{
-		"@context": "http://schema.org",
-		"@type": "Organization",
-		"name": "",
-		"logo": "images/logo.png",
-		"sameAs": []
-}</script>
-    <meta name="theme-color" content="#f58d54">
-    <meta property="og:title" content="Home">
-    <meta property="og:type" content="website">
-    <meta data-intl-tel-input-cdn-path="intlTelInput/">
-
-
-
+  <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+  {% block extra_css %}{% endblock %}
 </head>
-<body data-home-page="Home.html" data-home-page-title="Home" data-path-to-root="./" data-include-products="false"
-      class="u-body u-xl-mode" data-lang="en">
-<header class="u-clearfix u-header u-palette-3-light-1 u-header" id="sec-2a97"><a href="{% url 'home' %}"
-                                                                                  class="u-image u-logo u-image-1"
-                                                                                  data-image-width="533"
-                                                                                  data-image-height="468"
-                                                                                  data-animation-name="customAnimationIn"
-                                                                                  data-animation-duration="1000"
-                                                                                  data-animation-delay="0">
-    <img src="{% static 'images/logo.png' %}" class="u-logo-image u-logo-image-1">
-</a>
-    <h1 class="u-align-center u-custom-font u-text u-text-color-var u-text-1">
-        Изкривени щеки&nbsp;&nbsp;
-    </h1>
 
-    <nav class="u-align-left u-font-size-14 u-menu u-menu-one-level u-nav-spacing-25 u-offcanvas u-menu-1"
-         data-responsive-from="MD" role="navigation">
-        <div class="menu-collapse"
-             style="font-size: 1rem; letter-spacing: 0px; font-weight: 700; text-transform: uppercase;">
-            <a class="u-button-style u-custom-active-border-color u-custom-border u-custom-border-color u-custom-borders u-custom-hover-border-color u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-hamburger-link u-nav-link u-hamburger-link-1"
-               href="#" tabindex="-1" aria-label="Open menu" aria-controls="8384">
-                <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 302 302" style="">
-                    <use xlink:href="#svg-7b92"></use>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-                     id="svg-7b92" x="0px" y="0px" viewBox="0 0 302 302" style="enable-background:new 0 0 302 302;"
-                     xml:space="preserve" class="u-svg-content"><g><rect y="36" width="302" height="30"></rect><rect
-                        y="236" width="302" height="30"></rect><rect y="136" width="302" height="30"></rect>
-</g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g>
-                    <g></g></svg>
+<body>
+  <header class="header" id="top">
+    <nav class="nav container" aria-label="Primary">
+      <a class="brand" href="{% url 'home' %}">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="{% static 'images/logo.png' %}" alt="" class="brand-logo" />
+        </span>
+
+        <span class="brand-title">
+          <span class="brand-name">Изкривени щеки</span>
+          <span class="brand-tag">{% trans "Mountain community" %}</span>
+        </span>
+      </a>
+
+      <div class="nav-right">
+        <button class="btn btn-ghost btn-sm theme-btn" id="themeBtn" type="button" aria-label="Toggle theme">
+          Dark
+        </button>
+
+        <button class="nav-toggle" id="navToggle" type="button"
+                aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          ☰
+        </button>
+      </div>
+
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a class="nav-link" href="{% url 'home' %}">{% trans "Home" %}</a></li>
+        <li><a class="nav-link" href="{% url 'contacts' %}">{% trans "Contacts" %}</a></li>
+        <li><a class="nav-link" href="{% url 'about' %}">{% trans "Members" %}</a></li>
+        <li><a class="nav-link" href="{% url 'new-events' %}">{% trans "New Events" %}</a></li>
+        <li><a class="nav-link" href="{% url 'past-events' %}">{% trans "Past Events" %}</a></li>
+        <li><a class="nav-link" href="{% url 'photos' %}">{% trans "Photos" %}</a></li>
+
+        <li class="nav-sep" aria-hidden="true"></li>
+
+        {% if not user.is_authenticated %}
+          <li>
+            <a class="btn btn-primary btn-sm" href="{% url 'login' %}">
+              {% trans "Login" %}
             </a>
-        </div>
-        <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-spacing-30 u-unstyled u-nav-1" role="menubar">
-                <li role="none" class="u-nav-item"><a role="menuitem"
-                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'home' %}"
-                                                      style="padding: 10px 0px;"> {% trans "Home" %}</a>
-                </li>
+          </li>
+        {% else %}
+          <li>
+            <a class="btn btn-secondary btn-sm" href="{% url 'profile-details' request.user.pk %}">
+              {% trans "Account" %}
+            </a>
+          </li>
+          <li>
+            <form method="post" action="{% url 'logout' %}" class="inline-form">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline btn-sm">
+                {% trans "Logout" %}
+              </button>
+            </form>
+          </li>
+        {% endif %}
 
-                <li role="none" class="u-nav-item"><a role="menuitem"
-                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'about' %}"
-                                                      style="padding: 10px 0px;">{% translate 'Members' %}</a>
-                </li>
+        <li class="nav-sep" aria-hidden="true"></li>
 
-                <li role="none" class="u-nav-item"><a role="menuitem"
-                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'contacts' %}"
-                                                      style="padding: 10px 0px;">{% trans 'Contacts' %} </a>
-                </li>
+      {% get_current_language as LANGUAGE_CODE %}
+<li>
+  <form action="{% url 'set_language' %}" method="post" class="inline-form">
+    {% csrf_token %}
 
-                <li role="none" class="u-nav-item"><a role="menuitem"
-                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'new-events' %}"
-                                                      style="padding: 10px 0px;">{% trans 'New Events' %} </a>
-                </li>
+    {# махаме /bg или /en от началото -> остава /events/..., /contacts/..., etc #}
+    <input type="hidden" name="next" value="{{ request.get_full_path|slice:'3:' }}">
 
-                <li role="none" class="u-nav-item"><a role="menuitem"
-                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'past-events' %}"
-                                                      style="padding: 10px 0px;">{% trans 'Past Events' %} </a>
-                </li>
-
-
-                <li role="none" class="u-nav-item"><a role="menuitem"
-                                                      class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                      href="{% url 'photos' %}"
-                                                      style="padding: 10px 0px;">{% trans 'Photos' %} </a>
-                </li>
-
-                {% if not  user.is_authenticated %}
-                    <li role="none" class="u-nav-item"><a role="menuitem"
-                                                          class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                          href="{% url 'login' %}" target="_blank"
-                                                          style="padding: 10px 0px;">{% trans 'Login' %} </a>
-                    </li>
-                {% else %}
-                    <li role="none" class="u-nav-item"><a role="menuitem"
-                                                          class="u-border-2 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-1-base"
-                                                          href="{% url 'profile-details' request.user.pk %}"
-                                                          style="padding: 10px 0px;">{% trans 'Account' %} </a>
-                    </li>
-                    <li role="none" class="u-nav-item">
-                        <form method="post" action="{% url 'logout' %}" style="display:inline;">
-                            {% csrf_token %}
-                            <button type="submit"
-                                    class="u-border-2 u-border-active-palette-1-base
-               u-border-hover-palette-1-base
-               u-border-no-left u-border-no-right
-               u-border-no-top u-border-white
-               u-button-style u-nav-link
-               u-text-active-palette-1-base
-               u-text-hover-palette-1-base
-               nav-button-right"
-                                    style="background:none; border:none; padding:10px 0px; cursor:pointer; font:inherit; color:inherit; text-transform:inherit; letter-spacing:inherit;">
-                                {% trans 'Logout' %}
-                            </button>
-
-                        </form>
-                    </li>
-
-                {% endif %}
-                {% get_current_language as LANGUAGE_CODE %}
-
-                {% if LANGUAGE_CODE == "bg" %}
-                    <!-- Show EN button -->
-                    <li role="none" class="u-nav-item">
-                        <form action="{% url 'set_language' %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                            <button type="submit" name="language" value="en"
-                                    style="background:none; border:1px solid #fff; border-radius:4px;
-                       font-size:14px; padding:4px 8px; margin-left:6px;
-                       cursor:pointer; color:#fff; font-weight:bold;">
-                                EN
-                            </button>
-                        </form>
-                    </li>
-                {% else %}
-                    <!-- Show BG button -->
-                    <li role="none" class="u-nav-item">
-                        <form action="{% url 'set_language' %}" method="post" style="display:inline;">
-                            {% csrf_token %}
-                            <input type="hidden" name="next" value="{{ request.get_full_path }}">
-                            <button type="submit" name="language" value="bg"
-                                    style="background:none; border:1px solid #fff; border-radius:4px;
-                       font-size:14px; padding:4px 8px; margin-left:6px;
-                       cursor:pointer; color:#fff; font-weight:bold;">
-                                BG
-                            </button>
-                        </form>
-                    </li>
-                {% endif %}
-
-
-            </ul>
-        </div>
-
-        <style class="menu-style">@media (max-width: 939px) {
-            [data-responsive-from="MD"] .u-nav-container {
-                display: none;
-            }
-
-            [data-responsive-from="MD"] .menu-collapse {
-                display: block;
-            }
-        }</style>
-    </nav>
-    {% if user.is_authenticated %}
-        <p class="u-align-center u-text u-text-color-var u-text-2">{% trans 'Welcome' %} : {{ user.email }}</p>
+    {% if LANGUAGE_CODE == "bg" %}
+      <button type="submit" name="language" value="en" class="lang-btn" aria-label="Switch to English">
+        EN
+      </button>
     {% else %}
-        <p class="u-align-center u-text u-text-color-var u-text-2">{% trans 'Welcome' %} : Anonymous</p>
+      <button type="submit" name="language" value="bg" class="lang-btn" aria-label="Превключи на български">
+        BG
+      </button>
     {% endif %}
-</header>
-{% block content %}
-{% endblock %}
+  </form>
+</li>
 
+      </ul>
+    </nav>
 
-
-<footer class="u-align-center-md u-align-center-sm u-align-center-xs u-clearfix u-footer u-palette-3-light-1"
-        id="sec-ad58">
-    <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-sm u-sheet-1">
-        <a href="{% url 'home' %}" class="u-image u-logo u-image-1" data-image-width="533" data-image-height="468">
-            <img src="{% static 'images/logo.png' %}" class="u-logo-image u-logo-image-1">
-        </a>
-        <h4 class="u-align-center-lg u-align-center-md u-align-center-xl u-custom-font u-text u-text-color-var u-text-1">
-            Изкривени Щеки&nbsp; - Shteki Team 2025. All rights reserved. </h4>
-        <div class="u-align-left u-social-icons u-social-icons-1">
-            <a class="u-social-url" title="facebook" target="_blank"
-               href="https://www.facebook.com/groups/987216818883275"><span
-                    class="u-icon u-social-facebook u-social-icon u-icon-1"><svg class="u-svg-link"
-                                                                                 preserveAspectRatio="xMidYMin slice"
-                                                                                 viewBox="0 0 112 112" style=""><use
-                    xlink:href="#svg-028e"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0"
-                                                            id="svg-028e"><circle fill="currentColor" cx="56.1"
-                                                                                  cy="56.1" r="55"></circle><path
-                    fill="#FFFFFF" d="M73.5,31.6h-9.1c-1.4,0-3.6,0.8-3.6,3.9v8.5h12.6L72,58.3H60.8v40.8H43.9V58.3h-8V43.9h8v-9.2
-      c0-6.7,3.1-17,17-17h12.5v13.9H73.5z"></path></svg></span>
-            </a>
-            <a class="u-social-url" title="instagram" target="_blank" href=""><span
-                    class="u-icon u-social-icon u-social-instagram u-icon-2"><svg class="u-svg-link"
-                                                                                  preserveAspectRatio="xMidYMin slice"
-                                                                                  viewBox="0 0 112 112" style=""><use
-                    xlink:href="#svg-fd1e"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0"
-                                                            id="svg-fd1e"><circle fill="currentColor" cx="56.1"
-                                                                                  cy="56.1" r="55"></circle><path
-                    fill="#FFFFFF" d="M55.9,38.2c-9.9,0-17.9,8-17.9,17.9C38,66,46,74,55.9,74c9.9,0,17.9-8,17.9-17.9C73.8,46.2,65.8,38.2,55.9,38.2
-      z M55.9,66.4c-5.7,0-10.3-4.6-10.3-10.3c-0.1-5.7,4.6-10.3,10.3-10.3c5.7,0,10.3,4.6,10.3,10.3C66.2,61.8,61.6,66.4,55.9,66.4z"></path><path
-                    fill="#FFFFFF"
-                    d="M74.3,33.5c-2.3,0-4.2,1.9-4.2,4.2s1.9,4.2,4.2,4.2s4.2-1.9,4.2-4.2S76.6,33.5,74.3,33.5z"></path><path
-                    fill="#FFFFFF" d="M73.1,21.3H38.6c-9.7,0-17.5,7.9-17.5,17.5v34.5c0,9.7,7.9,17.6,17.5,17.6h34.5c9.7,0,17.5-7.9,17.5-17.5V38.8
-      C90.6,29.1,82.7,21.3,73.1,21.3z M83,73.3c0,5.5-4.5,9.9-9.9,9.9H38.6c-5.5,0-9.9-4.5-9.9-9.9V38.8c0-5.5,4.5-9.9,9.9-9.9h34.5
-      c5.5,0,9.9,4.5,9.9,9.9V73.3z"></path></svg></span>
-            </a>
-            <a class="u-social-url" title="linkedin" target="_blank" href=""><span
-                    class="u-icon u-social-icon u-social-linkedin u-icon-3"><svg class="u-svg-link"
-                                                                                 preserveAspectRatio="xMidYMin slice"
-                                                                                 viewBox="0 0 112 112" style=""><use
-                    xlink:href="#svg-6010"></use></svg><svg class="u-svg-content" viewBox="0 0 112 112" x="0" y="0"
-                                                            id="svg-6010"><circle fill="currentColor" cx="56.1"
-                                                                                  cy="56.1" r="55"></circle><path
-                    fill="#FFFFFF" d="M41.3,83.7H27.9V43.4h13.4V83.7z M34.6,37.9L34.6,37.9c-4.6,0-7.5-3.1-7.5-7c0-4,3-7,7.6-7s7.4,3,7.5,7
-      C42.2,34.8,39.2,37.9,34.6,37.9z M89.6,83.7H76.2V62.2c0-5.4-1.9-9.1-6.8-9.1c-3.7,0-5.9,2.5-6.9,4.9c-0.4,0.9-0.4,2.1-0.4,3.3v22.5
-      H48.7c0,0,0.2-36.5,0-40.3h13.4v5.7c1.8-2.7,5-6.7,12.1-6.7c8.8,0,15.4,5.8,15.4,18.1V83.7z"></path></svg></span>
-            </a>
-        </div>
+    <div class="container header-sub">
+      {% if user.is_authenticated %}
+        <p class="welcome">
+          {% trans "Welcome" %}: <span class="welcome-strong">{{ user.email }}</span>
+        </p>
+      {% else %}
+        <p class="welcome">
+          {% trans "Welcome" %}: <span class="welcome-strong">Anonymous</span>
+        </p>
+      {% endif %}
     </div>
-</footer>
+  </header>
 
+  <main class="main">
+    <div class="container content main-content">
+      {% block content %}{% endblock %}
+    </div>
+  </main>
 
+  <footer class="footer">
+    <div class="container footer-row">
+      <a href="{% url 'home' %}" class="footer-brand" aria-label="Home">
+        <img src="{% static 'images/logo.png' %}" alt="" class="footer-logo" />
+        <span class="footer-brand-name">Изкривени щеки</span>
+      </a>
+
+      <p class="footer-copy">
+        © <span id="year"></span> Shteki Team. All rights reserved.
+      </p>
+
+      <div class="footer-social" aria-label="Social">
+        <a class="social-link" target="_blank" rel="noopener"
+           href="https://www.facebook.com/groups/987216818883275">Facebook</a>
+        <a class="social-link" target="_blank" rel="noopener" href="">Instagram</a>
+        <a class="social-link" target="_blank" rel="noopener" href="">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  {% block extra_js %}{% endblock %}
+
+  <script>
+    // Mobile nav
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    navToggle?.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(open));
+    });
+
+    navLinks?.addEventListener("click", (e) => {
+      const a = e.target.closest("a");
+      if (!a) return;
+      navLinks.classList.remove("open");
+      navToggle.setAttribute("aria-expanded", "false");
+    });
+
+    // Theme toggle
+    const themeBtn = document.getElementById("themeBtn");
+    const root = document.documentElement;
+
+    function setTheme(next) {
+      root.setAttribute("data-theme", next);
+      if (themeBtn) themeBtn.textContent = next === "dark" ? "Light" : "Dark";
+      localStorage.setItem("theme", next);
+    }
+
+    const saved = localStorage.getItem("theme");
+    if (saved === "dark") setTheme("dark");
+
+    themeBtn?.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      setTheme(current === "dark" ? "light" : "dark");
+    });
+
+    // Footer year
+    document.getElementById("year").textContent = String(new Date().getFullYear());
+  </script>
 </body>
 </html>

@@ -35,7 +35,7 @@ class Event(models.Model):
     image1 = models.ImageField(
         upload_to='event_images/',
         blank=True,
-        null=True,
+
         validators=[
             FileExtensionValidator(['jpg', 'jpeg', 'png', 'gif']),
             FileSizeValidator(max_size_mb=6)
@@ -44,7 +44,7 @@ class Event(models.Model):
     image2 = models.ImageField(
         upload_to='event_images/',
         blank=True,
-        null=True,
+
         validators=[
             FileExtensionValidator(['jpg', 'jpeg', 'png', 'gif']),
             FileSizeValidator(max_size_mb=6)
@@ -53,7 +53,7 @@ class Event(models.Model):
     image3 = models.ImageField(
         upload_to='event_images/',
         blank=True,
-        null=True,
+
         validators=[
             FileExtensionValidator(['jpg', 'jpeg', 'png', 'gif']),
             FileSizeValidator(max_size_mb=6)
@@ -82,7 +82,7 @@ class Event(models.Model):
         if self.image2 and hasattr(self.image2, 'url'):
             return self.image2.url
 
-        return '/static/images/photo-1519904981063-b0cf448d479e.jpeg'
+        return '/static/images/37.jpg'
 
     @property
     def image3_url(self):

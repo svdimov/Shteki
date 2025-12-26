@@ -36,10 +36,10 @@ msgid "Contacts"
 msgstr "Контакти"
 
 msgid "New Events"
-msgstr "Нови Събития"
+msgstr "Нови преходи"
 
 msgid "Past Events"
-msgstr "Минали Събития"
+msgstr "Минали преходи"
 
 msgid "Photos"
 msgstr "Снимки"
@@ -126,7 +126,7 @@ msgstr "Търсене"
 
 
 msgid "Event photos"
-msgstr "Снимки от събитието"
+msgstr "Снимки от преходите"
 
 msgid "Search photos..."
 msgstr "Търсене на снимки..."
@@ -347,4 +347,7 @@ msgstr "Добави коментар"
 
 msgid "people will go:"
 msgstr "Ще присъстват:"
+
+msgid "Are you sure you want to delete this event?"
+msgstr "Сигурни ли сте, че искате да изтриете това събитие?"
 

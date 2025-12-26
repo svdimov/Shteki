@@ -3,7 +3,7 @@
 {% load i18n %}
 {% block content %}
 
-    <meta name="viewport" content="width=1024">
+
     <link rel="stylesheet" href="{% static 'css/photos.css' %}" media="screen">
 
     <section class="u-border-1 u-border-palette-1-base u-clearfix u-image u-section-2" id="sec-0ed1">
@@ -30,125 +30,187 @@
         </div>
     </section>
 
-    <script>
-        const apiUrl = "{% url 'api-events' %}";
-        const detailsUrlTemplate = "{% url 'event-details' 0 %}";
-        const morePhotosUrlTemplate = "{% url 'photos-detail' 0 %}";
+   <script>
+  const apiUrl = "{% url 'api-events' %}";
+  const detailsUrlTemplate = "{% url 'photos-detail' 0 %}";
 
-        let currentQuery = '';
-        let currentPage = 1;
-        let totalPages = 1;
+  const FALLBACK_IMG1 = "{% static 'images/452545.jpg' %}";
+  const FALLBACK_IMG2 = "{% static 'images/37.jpg' %}";
+  const FALLBACK_IMG3 = "{% static 'images/2133123.jpg' %}";
 
-        document.getElementById('search-btn').addEventListener('click', () => {
-            currentQuery = document.getElementById('search-input').value.trim();
-            currentPage = 1;
-            loadEvents();
-        });
-        document.getElementById('search-input').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                currentQuery = document.getElementById('search-input').value.trim();
-                currentPage = 1;
-                loadEvents();
-            }
-        });
+  // i18n strings from Django (safe)
+  const TXT_NO_EVENTS = "{% trans 'No past events.' %}";
+  const TXT_FIRST = "{% trans 'First' %}";
+  const TXT_PREV = "{% trans 'Previous' %}";
+  const TXT_NEXT = "{% trans 'Next' %}";
+  const TXT_LAST = "{% trans 'Last' %}";
+  const TXT_PAGE = "{% trans 'Page' %}";
+  const TXT_OF = "{% trans 'of' %}";
+  const TXT_MORE_INFO = "{% trans 'More info' %}";
 
-        function loadEvents() {
-            let url = `${apiUrl}?page=${currentPage}`;
-            if (currentQuery) {
-                url += `&q=${encodeURIComponent(currentQuery)}`;
-            }
+  let currentQuery = "";
+  let currentPage = 1;
+  let totalPages = 1;
 
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    renderEvents(data.results);
-                    renderPagination(data.count);
-                });
-        }
+  const container = document.getElementById("events-container");
+  const pagination = document.getElementById("pagination-container");
+  const searchBtn = document.getElementById("search-btn");
+  const searchInput = document.getElementById("search-input");
 
-        function renderEvents(events) {
-            const container = document.getElementById('events-container');
-            container.innerHTML = '';
+  searchBtn?.addEventListener("click", () => {
+    currentQuery = (searchInput.value || "").trim();
+    currentPage = 1;
+    loadEvents();
+  });
 
-            if (events.length === 0) {
-                container.innerHTML = '<h3 class="center-text">No photos.</h3>';
-                return;
-            }
+  searchInput?.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      currentQuery = (searchInput.value || "").trim();
+      currentPage = 1;
+      loadEvents();
+    }
+  });
 
-            events.forEach(event => {
-                const img1 = event.image1 && event.image1 !== '' ? event.image1 : "{% static 'images/452545.jpg' %}";
-                const img2 = event.image2 && event.image2 !== '' ? event.image2 : "{% static 'images/photo-1519904981063-b0cf448d479e.jpeg' %}";
-                const img3 = event.image3 && event.image3 !== '' ? event.image3 : "{% static 'images/2133123.jpg' %}";
-                const detailUrl = detailsUrlTemplate.replace('/0/', '/' + event.id + '/');
-                const morePhotosUrl = morePhotosUrlTemplate.replace('/0/', '/' + event.id + '/');
+  function buildUrl() {
+    const url = new URL(apiUrl, window.location.origin);
+    url.searchParams.set("page", String(currentPage));
+    if (currentQuery) url.searchParams.set("q", currentQuery);
+    return url.toString();
+  }
 
-                container.innerHTML += `
-                <div class="u-align-left u-container-align-left u-container-style u-group u-palette-1-light-3 u-radius u-shape-round u-group-1"
-                     data-animation-name="customAnimationIn"
-                     data-animation-duration="1500"
-                     data-animation-delay="0">
-                    <div class="u-container-layout u-container-layout-2">
+  async function loadEvents() {
+    try {
+      const res = await fetch(buildUrl());
+      const data = await res.json();
 
-                        <img src="${img1}" alt="${event.name}"
-                             class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-2"
-                             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+      renderEvents(Array.isArray(data.results) ? data.results : []);
+      renderPagination(typeof data.count === "number" ? data.count : 0);
+    } catch (err) {
+      console.error("past-events load error:", err);
+      renderEvents([]);
+      renderPagination(0);
+    }
+  }
 
-                        <img src="${img2}" alt="${event.name}"
-                             class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-3"
-                             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+  // --------- Variant B: DOM only ----------
+  function renderEvents(events) {
+    container.replaceChildren();
 
-                        <img src="${img3}" alt="${event.name}"
-                             class="u-border-2 u-border-palette-1-base u-image u-image-circle u-image-4"
-                             data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+    if (!events.length) {
+      const h = document.createElement("h3");
+      h.className = "center-text";
+      h.textContent = TXT_NO_EVENTS;
+      container.appendChild(h);
+      return;
+    }
 
-                        <h3 class="u-align-center u-text u-text-2">${event.name}</h3>
-                        <div class="u-align-center u-border-3 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
+    const frag = document.createDocumentFragment();
 
-                        <div style="display:flex; gap:12px; justify-content:center;">
+    events.forEach((event) => {
+      const img1 = event.image1 && String(event.image1).trim() ? event.image1 : FALLBACK_IMG1;
+      const img2 = event.image2 && String(event.image2).trim() ? event.image2 : FALLBACK_IMG2;
+      const img3 = event.image3 && String(event.image3).trim() ? event.image3 : FALLBACK_IMG3;
 
-                            <a href="${morePhotosUrl}" class="u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2">
-                                {% trans 'More Photos' %}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-            });
-        }
+      // keep backend url shape: /.../0/ -> /.../<id>/
+      const detailUrl = detailsUrlTemplate.replace("/0/", `/${event.id}/`);
 
-        function renderPagination(totalItems) {
-            const container = document.getElementById('pagination-container');
-            container.innerHTML = '';
+      const card = document.createElement("div");
+      card.className =
+        "u-align-left u-container-align-left u-container-style u-group u-palette-1-light-3 u-radius u-shape-round u-group-1";
+      card.setAttribute("data-animation-name", "customAnimationIn");
+      card.setAttribute("data-animation-duration", "1500");
+      card.setAttribute("data-animation-delay", "0");
 
-            const perPage = 8;
-            totalPages = Math.ceil(totalItems / perPage);
+      const layout = document.createElement("div");
+      layout.className = "u-container-layout u-container-layout-2";
 
-            if (totalPages <= 1) return;
+      layout.appendChild(makeCircleImg(img1, event.name, "u-image-2"));
+      layout.appendChild(makeCircleImg(img2, event.name, "u-image-3"));
+      layout.appendChild(makeCircleImg(img3, event.name, "u-image-4"));
 
-            if (currentPage > 1) {
-                container.innerHTML += `<a href="#" onclick="gotoPage(1); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">First</a>`;
-                container.innerHTML += `<a href="#" onclick="gotoPage(${currentPage - 1}); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">Previous</a>`;
-            }
+      const title = document.createElement("h3");
+      title.className = "u-align-center u-text u-text-2";
+      title.textContent = event.name || "";
+      layout.appendChild(title);
 
-            container.innerHTML += `<span style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px;">
-            Page ${currentPage} of ${totalPages}
-        </span>`;
+      const line = document.createElement("div");
+      line.className = "u-align-center u-border-3 u-border-palette-1-base u-line u-line-horizontal u-line-1";
+      layout.appendChild(line);
 
-            if (currentPage < totalPages) {
-                container.innerHTML += `<a href="#" onclick="gotoPage(${currentPage + 1}); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">Next</a>`;
-                container.innerHTML += `<a href="#" onclick="gotoPage(${totalPages}); return false;" style="padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; text-decoration: none;">Last</a>`;
-            }
-        }
+      const a = document.createElement("a");
+      a.href = detailUrl;
+      a.className = "u-btn u-button-style u-hover-palette-1-dark-1 u-palette-1-base u-btn-2";
+      a.textContent = TXT_MORE_INFO;
+      layout.appendChild(a);
 
-        function gotoPage(page) {
-            currentPage = page;
-            loadEvents();
-        }
+      card.appendChild(layout);
+      frag.appendChild(card);
+    });
 
-        window.onload = () => {
-            loadEvents();
-        };
-    </script>
+    container.appendChild(frag);
+  }
+
+  function makeCircleImg(src, alt, extraClass) {
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = alt || "";
+    img.className = `u-border-2 u-border-palette-1-base u-image u-image-circle ${extraClass}`;
+    img.setAttribute("data-animation-name", "customAnimationIn");
+    img.setAttribute("data-animation-duration", "1500");
+    img.setAttribute("data-animation-delay", "250");
+    return img;
+  }
+
+  // Pagination DOM only
+  function renderPagination(totalItems) {
+    pagination.replaceChildren();
+
+    const perPage = 8; // keep in sync with API
+    totalPages = Math.max(1, Math.ceil(totalItems / perPage));
+
+    if (totalPages <= 1) return;
+
+    if (currentPage > 1) {
+      pagination.appendChild(makePageLink(TXT_FIRST, 1));
+      pagination.appendChild(makePageLink(TXT_PREV, currentPage - 1));
+    }
+
+    const info = document.createElement("span");
+    info.textContent = `${TXT_PAGE} ${currentPage} ${TXT_OF} ${totalPages}`;
+    info.style.padding = "6px 12px";
+    info.style.border = "1px solid #ccc";
+    info.style.borderRadius = "4px";
+    pagination.appendChild(info);
+
+    if (currentPage < totalPages) {
+      pagination.appendChild(makePageLink(TXT_NEXT, currentPage + 1));
+      pagination.appendChild(makePageLink(TXT_LAST, totalPages));
+    }
+  }
+
+  function makePageLink(label, page) {
+    const link = document.createElement("a");
+    link.href = "#";
+    link.textContent = label;
+    link.style.padding = "6px 12px";
+    link.style.border = "1px solid #ccc";
+    link.style.borderRadius = "4px";
+    link.style.textDecoration = "none";
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      gotoPage(page);
+    });
+    return link;
+  }
+
+  function gotoPage(page) {
+    currentPage = page;
+    loadEvents();
+  }
+
+  window.addEventListener("load", loadEvents);
+</script>
+
 
 {% endblock %}

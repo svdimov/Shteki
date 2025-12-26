@@ -3,130 +3,104 @@
 {% load i18n %}
 
 {% block content %}
-    <meta name="viewport" content="width=1024">
-    <link rel="stylesheet" href="{% static 'css/Contacts.css' %}" media="screen">
+  {% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/contacts.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  {% endblock %}
 
-    <section class="u-clearfix u-container-align-center u-grey-80 u-section-1" id="carousel_cb01">
-        <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-            <div class="data-layout-selected u-clearfix u-expanded-width u-layout-wrap u-layout-wrap-1">
-                <div class="u-layout">
-                    <div class="u-layout-row">
-                        <div class="u-container-style u-layout-cell u-right-cell u-size-34-lg u-size-34-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-1"
-                             data-animation-name="customAnimationIn" data-animation-duration="1500"
-                             data-animation-delay="500">
-                            <div class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-container-layout-1">
-                                <div class="u-shape u-shape-svg u-text-palette-5-dark-2 u-shape-1"
-                                     data-animation-name="customAnimationIn" data-animation-duration="1500"
-                                     data-animation-delay="500">
-                                    <svg class="u-svg-link" preserveAspectRatio="none" viewBox="0 0 160 160" style="">
-                                        <use xlink:href="#svg-6487"></use>
-                                    </svg>
-                                    <svg class="u-svg-content" viewBox="0 0 160 160" x="0px" y="0px" id="svg-6487"
-                                         style="enable-background:new 0 0 160 160;">
-                                        <path d="M80,30c27.6,0,50,22.4,50,50s-22.4,50-50,50s-50-22.4-50-50S52.4,30,80,30 M80,0C35.8,0,0,35.8,0,80s35.8,80,80,80
-	s80-35.8,80-80S124.2,0,80,0L80,0z"></path>
-                                    </svg>
-                                </div>
-                                <div class="u-image u-image-circle u-image-1" data-image-width="632"
-                                     data-image-height="632" data-animation-name="customAnimationIn"
-                                     data-animation-duration="1500" data-animation-delay="250"></div>
-                                <div class="u-palette-1-base u-preserve-proportions u-shape u-shape-circle u-shape-2"
-                                     data-animation-name="customAnimationIn" data-animation-duration="1500"
-                                     data-animation-delay="500"></div>
-                            </div>
-                        </div>
-                        <div class="u-align-center u-container-align-center u-container-style u-layout-cell u-left-cell u-palette-2-light-3 u-radius-32 u-shape-round u-size-26-lg u-size-26-xl u-size-60-md u-size-60-sm u-size-60-xs u-layout-cell-2"
-                             data-animation-name="customAnimationIn" data-animation-duration="1500"
-                             data-animation-delay="0">
-                            <div class="u-container-layout u-valign-middle u-container-layout-2">
-                                <h2 class="u-align-center u-text u-text-1">{% trans 'Contact Us' %}</h2>
-                                <div class="u-align-center u-border-3 u-border-palette-1-base u-line u-line-horizontal u-line-1"></div>
-                                <h5 class="u-align-center u-custom-font u-font-montserrat u-text u-text-2"><span
-                                        style="font-weight: 700;">{% trans 'Phone' %}</span>: <a href="#"
-                                                                                   class="u-active-none u-border-1 u-border-active-black u-border-grey-70 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-btn u-button-link u-button-style u-hover-none u-none u-text-active-grey-60 u-text-body-color u-text-hover-grey-60 u-btn-1"
-                                                                                   target="_blank"
-                                                                                   data-animation-name=""
-                                                                                   data-animation-duration="0"
-                                                                                   data-animation-delay="0"
-                                                                                   data-animation-direction="">+359 877
-                                    096 911</a>
-                                    <br><span style="font-weight: 700;">{% trans 'Address' %}</span>: {% trans 'str. Nish 8 , Veliko Tarnovo' %} <br><span
-                                            style="font-weight: 700;">{% trans 'Mail' %}</span>: <a href="#"
-                                                                                      class="u-active-none u-border-1 u-border-active-black u-border-grey-70 u-border-hover-grey-75 u-border-no-left u-border-no-right u-border-no-top u-btn u-button-link u-button-style u-hover-none u-none u-text-active-grey-60 u-text-body-color u-text-hover-grey-60 u-btn-2"
-                                                                                      target="_blank"
-                                                                                      data-animation-name=""
-                                                                                      data-animation-duration="0"
-                                                                                      data-animation-delay="0"
-                                                                                      data-animation-direction="">
-                                        izkrivenishteki@yahoo.com</a>
-                                </h5>
+  <!-- HERO / CONTACT INFO -->
+  <section class="contact-hero" aria-labelledby="contactTitle">
+    <div class="contact-hero__inner">
+      <div class="contact-hero__grid">
 
-                                <div class="social-icons-wrapper">
-                                    <a href="https://www.facebook.com/groups/987216818883275" target="_blank"
-                                       title="Facebook" class="social-icon facebook-icon">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Left visual -->
+        <div class="contact-visual" aria-hidden="true">
+          <div class="contact-visual__ring"></div>
+          <div class="contact-visual__photo"></div>
+          <div class="contact-visual__dot"></div>
         </div>
-    </section>
-    <section class="u-align-center u-clearfix u-container-align-center u-grey-80 u-section-2" id="sec-85fb">
-        <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-            <h2 class="u-align-center u-text u-text-default u-text-1" data-animation-name="customAnimationIn"
-                data-animation-duration="1500">{% trans 'Get in touch' %}</h2>
-            <div class="u-form u-form-1">
-                <form method="post" action="{% url 'contacts' %}" class="custom-contact-form">
-                    {% csrf_token %}
 
-                    {% if form.errors %}
-                        <div class="form-errors">
-                            <ul>
-                                {% for field in form %}
-                                    {% for error in field.errors %}
-                                        <li>{{ error }}</li>
-                                    {% endfor %}
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endif %}
+        <!-- Right info card -->
+        <div class="contact-card">
+          <h2 class="contact-card__title" id="contactTitle">{% trans "Contact Us" %}</h2>
+          <div class="contact-card__line" aria-hidden="true"></div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="id_name">{% trans 'Name' %}</label>
-                            <input type="text" name="name" id="id_name" placeholder="Enter your name"
-                                   value="{{ form.name.value|default_if_none:'' }}" required>
-                        </div>
+          <div class="contact-card__rows">
+            <p class="contact-row">
+              <span class="contact-row__label">{% trans "Phone" %}</span>
+              <a class="contact-row__value" href="tel:+359877096911">+359 877 096 911</a>
+            </p>
 
-                        <div class="form-group">
-                            <label for="id_email">{% trans 'Email' %}</label>
-                            <input type="email" name="email" id="id_email" placeholder="Enter your email"
-                                   value="{{ form.email.value|default_if_none:'' }}" required>
-                        </div>
-                    </div>
+            <p class="contact-row">
+              <span class="contact-row__label">{% trans "Address" %}</span>
+              <span class="contact-row__value">{% trans "str. Nish 8 , Veliko Tarnovo" %}</span>
+            </p>
 
-                    <div class="form-row">
-                        <div class="form-group full-width">
-                            <label for="id_message">{% trans 'Message' %}</label>
-                            <textarea name="message" id="id_message" placeholder="Enter your message"
-                                      rows="5" required>{{ form.message.value|default_if_none:'' }}</textarea>
-                        </div>
-                    </div>
+            <p class="contact-row">
+              <span class="contact-row__label">{% trans "Mail" %}</span>
+              <a class="contact-row__value" href="mailto:izkrivenishteki@yahoo.com">izkrivenishteki@yahoo.com</a>
+            </p>
+          </div>
 
-                    <div class="form-row text-center">
-                        <button type="submit" class="custom-submit-button">{% trans 'Send Message' %}</button>
-                    </div>
-                </form>
-
-
-            </div>
+          <div class="contact-social">
+            <a class="social-pill" target="_blank" rel="noopener"
+               href="https://www.facebook.com/groups/987216818883275" aria-label="Facebook">
+              <i class="fab fa-facebook-f" aria-hidden="true"></i>
+              <span>Facebook</span>
+            </a>
+          </div>
         </div>
-    </section>
 
+      </div>
+    </div>
+  </section>
 
+  <!-- FORM -->
+  <section class="contact-form" aria-labelledby="formTitle">
+    <div class="contact-form__inner">
+      <h2 class="contact-form__title" id="formTitle">{% trans "Get in touch" %}</h2>
+
+      <form method="post" action="{% url 'contacts' %}" class="form-card" novalidate>
+        {% csrf_token %}
+
+        {% if form.errors %}
+          <div class="form-errors" role="alert">
+            <strong>{% trans "Please fix the errors below." %}</strong>
+            <ul>
+              {% for field in form %}
+                {% for error in field.errors %}
+                  <li>{{ error }}</li>
+                {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="id_name">{% trans "Name" %}</label>
+            <input type="text" name="name" id="id_name" placeholder="{% trans 'Enter your name' %}"
+                   value="{{ form.name.value|default_if_none:'' }}" required>
+          </div>
+
+          <div class="field">
+            <label for="id_email">{% trans "Email" %}</label>
+            <input type="email" name="email" id="id_email" placeholder="{% trans 'Enter your email' %}"
+                   value="{{ form.email.value|default_if_none:'' }}" required>
+          </div>
+
+          <div class="field field--full">
+            <label for="id_message">{% trans "Message" %}</label>
+            <textarea name="message" id="id_message" rows="6" placeholder="{% trans 'Enter your message' %}" required>{{ form.message.value|default_if_none:'' }}</textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            {% trans "Send Message" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
 {% endblock %}
