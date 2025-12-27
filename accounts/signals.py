@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.mail import send_mail
@@ -5,25 +6,23 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.signals import user_login_failed, user_logged_in
-from accounts.models import Profile
 
 UserModel = get_user_model()
 
 
 @receiver(post_save, sender=UserModel)
-def create_profile(sender: UserModel, instance: UserModel, created: bool, **kwargs: dict) -> None:
+def create_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(
-            user=instance,
+        Profile = apps.get_model("accounts", "Profile")
+        Profile.objects.create(user=instance)
 
-        )
         try:
             send_mail(
                 subject='Welcome to www.izkriveni-shteki.bg',
                 message='Thank you for registering in www.izkriveni-shteki.bg! We are excited to have you on board.',
                 from_email=settings.COMPANY_EMAIL,
                 recipient_list=[instance.email],
-                fail_silently=True,  # или без това, но с except
+                fail_silently=True,
             )
         except Exception:
             pass
