@@ -83,7 +83,7 @@ class Profile(models.Model):
     def profile_picture_or_default(self):
         if self.profile_picture and self.profile_picture.storage.exists(self.profile_picture.name):
             return self.profile_picture.url
-        return static('/images/2133123.jpg')
+        return static('images/2133123.jpg')
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.user.email})" if self.first_name or self.last_name else self.user.email

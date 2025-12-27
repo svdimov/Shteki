@@ -10,7 +10,6 @@ from accounts.models import Profile
 UserModel = get_user_model()
 
 
-
 @receiver(post_save, sender=UserModel)
 def create_profile(sender: UserModel, instance: UserModel, created: bool, **kwargs: dict) -> None:
     if created:
@@ -18,12 +17,17 @@ def create_profile(sender: UserModel, instance: UserModel, created: bool, **kwar
             user=instance,
 
         )
-        send_mail(
-            subject='Welcome to www.izkriveni-shteki.bg',
-            message='Thank you for registering in www.izkriveni-shteki.bg! We are excited to have you on board.',
-            from_email=settings.COMPANY_EMAIL,  # Use default email settings
-            recipient_list=[instance.email],
-        )
+        try:
+            send_mail(
+                subject='Welcome to www.izkriveni-shteki.bg',
+                message='Thank you for registering in www.izkriveni-shteki.bg! We are excited to have you on board.',
+                from_email=settings.COMPANY_EMAIL,
+                recipient_list=[instance.email],
+                fail_silently=True,  # или без това, но с except
+            )
+        except Exception:
+            pass
+
 
 @receiver(user_login_failed)
 def handle_failed_admin_login(sender, credentials, request, **kwargs):
@@ -48,7 +52,6 @@ def handle_failed_admin_login(sender, credentials, request, **kwargs):
         user.save()
     except UserModel.DoesNotExist:
         pass
-
 
 
 @receiver(user_logged_in)
