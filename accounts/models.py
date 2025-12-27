@@ -1,4 +1,3 @@
-
 from django.contrib.auth.models import AbstractUser
 from django.templatetags.static import static
 
@@ -9,7 +8,6 @@ from django.db import models
 from accounts.choices import GenderChoice
 from accounts.managers import AppUserManager
 from accounts.validators import FileSizeValidator
-
 
 
 class AppUser(AbstractBaseUser, PermissionsMixin):
@@ -77,8 +75,6 @@ class Profile(models.Model):
 
     city = models.CharField(max_length=25, blank=True, null=True)
 
-
-
     @property
     def full_name(self):
         return f"{self.first_name or ''}  {self.last_name or ''}"
@@ -89,6 +85,11 @@ class Profile(models.Model):
             return self.profile_picture.url
         return static('/images/2133123.jpg')
 
-
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.user.email})" if self.first_name or self.last_name else self.user.email
+
+    class Profile(models.Model):
+        ...
+
+        class Meta:
+            ordering = ["id"]  # или "-created_at"
