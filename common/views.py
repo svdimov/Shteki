@@ -15,11 +15,12 @@ class HomePageView(TemplateView):
     template_name = 'index.html'
 
 
-class AboutAs(LoginRequiredMixin,ListView):
+class AboutAs(LoginRequiredMixin, ListView):
     model = Profile
     template_name = 'members.html'
     context_object_name = 'profiles'
     paginate_by = 6
+
     #
     def get_queryset(self):
         return Profile.objects.select_related('user')
@@ -33,8 +34,8 @@ class AboutAs(LoginRequiredMixin,ListView):
         return context
 
 
-
-
+from django.core.mail import EmailMessage
+from django.conf import settings
 
 
 class ContactView(FormView):
@@ -42,17 +43,22 @@ class ContactView(FormView):
     form_class = ContactForm
     success_url = reverse_lazy('contact-success')
 
+
     def form_valid(self, form):
-
-
-        send_mail(
-            subject=f"Contact form submission from {form.cleaned_data['name']}",
-            message=form.cleaned_data['message'],
-            from_email=form.cleaned_data['email'],
-            recipient_list=[settings.DEFAULT_CONTACT_EMAIL],
-            fail_silently=False,
+        subject = f"[Contact] {form.cleaned_data['name']} <{form.cleaned_data['email']}>"
+        body = (
+            f"From: {form.cleaned_data['name']} <{form.cleaned_data['email']}>\n\n"
+            f"{form.cleaned_data['message']}"
         )
 
+        email = EmailMessage(
+            subject=subject,
+            body=body,
+            from_email=settings.DEFAULT_FROM_EMAIL,  # напр. no-reply@izkriveni-shteki.bg
+            to=[settings.DEFAULT_CONTACT_EMAIL],  # izkrivenishteki@yahoo.com
+            reply_to=[form.cleaned_data["email"]],  # за Reply
+        )
+        email.send(fail_silently=False)
         return super().form_valid(form)
 
 
